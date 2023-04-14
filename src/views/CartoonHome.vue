@@ -1,6 +1,7 @@
 <template>
-  <header>
+  <header class="cartoon-top">
     <span> 1 2 3 </span>
+    <van-button type="primary">主要按钮</van-button>
   </header>
 </template>
 
@@ -10,4 +11,9 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+.cartoon-top {
+  height: 100vh;
+  background-color: pink;
+}
+</style>

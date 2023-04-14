@@ -8,7 +8,7 @@ const routes = [
       title: '首页',
       keepAlive: true,
     },
-    component: () => import('./views/CartoonHome.vue'),
+    component: () => import('../views/CartoonHome.vue'),
   },
 ]
 
