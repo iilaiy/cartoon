@@ -9,7 +9,16 @@
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx --fix",
     "format": "prettier --write \"./**/*.{html,vue,ts,js,cjs,json,md}\"",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "commit": "cz"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    },
+    "cz-customizable": {
+      "config": ".cz-config.cjs"
+    }
   },
   "lint-staged": {
     ".vue,.js,.ts,.jsx,.tsx": "eslint --fix",
