@@ -18,23 +18,23 @@ module.exports = {
   // 选项：consistent 如果对象中至少有一个属性需要引用，则需要引用所有属性
   // 选项：preserve 对象属性中引号的输入使用
   // 默认值：as-needed
-  // quoteProps: 'as-needed',
+  quoteProps: 'as-needed',
 
   // 在JSX中使用单引号而不是双引号，默认值：false
-  // jsxSingleQuote: false,
+  jsxSingleQuote: false,
 
   // 在多行逗号分隔的语法结构中，尽可能打印尾随逗号(例如，单行数组的后面永远不会有逗号)
   // 选项：es5 尾随逗号在ES5中有效(对象、数组等)。在TypeScript中，类型参数中没有后面的逗号
   // 选项：none 后面没有逗号
   // 选项：all 尽可能以逗号结尾(包括函数参数和调用)
   // 默认值：es5
-  // trailingComma: 'es5',
+  trailingComma: 'es5',
 
   // 在对象字面量的括号之间打印空格，默认值：true，例如：{ foo: bar }
-  // bracketSpacing: true,
+  bracketSpacing: true,
 
   // 将多行HTML (HTML, JSX, Vue, Angular)元素的>放在最后一行的末尾，而不是单独放在下一行(不适用于自关闭元素)。默认值：false
-  // bracketSameLine: false,
+  bracketSameLine: false,
 
   // 在唯一的箭头函数参数周围包含圆括号
   // 选项：always 总是包含圆括号。例如：(x) => x
