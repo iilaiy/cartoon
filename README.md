@@ -442,7 +442,9 @@ pnpm format
 ##### 代码提交
 
 ```
+git add *
 pnpm commit
+git push origin main
 ```
 
 ##### 发布
