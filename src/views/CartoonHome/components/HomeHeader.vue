@@ -1,0 +1,74 @@
+<template>
+  <div class="cartoon-top" @click.prevent>
+    <!--  顶部  -->
+    <div class="htop">
+      <!-- logo -->
+      <div class="logo">
+        <img :src="logo" alt="" />
+      </div>
+      <div class="search common">
+        <i class="search-icon">
+          <img src="@/assets/images/icon/search_icon.png" alt="" />
+        </i>
+        <span>搜索作品名</span>
+      </div>
+      <div class="bookshelf common">
+        <i class="search-icon">
+          <img src="@/assets/images/icon/booklist_icon.png" alt="" />
+        </i>
+        <span>书架</span>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+// import { ref } from "vue"
+import logo from '@/assets/images/cartoon.png'
+
+/**
+ * 点击跳转搜索页面
+ */
+</script>
+
+<style scoped lang="scss">
+.cartoon-top {
+  .htop {
+    height: 1.3rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    margin-bottom: 0.1rem;
+    .common {
+      display: flex;
+      align-items: center;
+    }
+    .logo {
+      width: 0.9rem;
+    }
+    span {
+      font-size: 0.35rem;
+    }
+    .search {
+      width: 63%;
+      height: 0.9rem;
+      justify-content: center;
+      background-color: #f7f7f7;
+      border-radius: 0.5rem;
+      i {
+        width: 0.55rem;
+      }
+      span {
+        color: #9999a5;
+      }
+    }
+    .bookshelf {
+      i {
+        float: left;
+        width: 0.6rem;
+        margin-right: 0.1rem;
+      }
+    }
+  }
+}
+</style>

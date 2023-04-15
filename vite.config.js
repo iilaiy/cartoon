@@ -26,18 +26,18 @@ export default defineConfig({
     },
   },
   server: {
-    // port: 8080, //启动端口
-    // hmr: {
-    //   host: '127.0.0.1',
-    //   port: 8080
-    // },
-    // 设置 https 代理
     proxy: {
       '/api': {
-        target: '127.0.0.1',
+        target: 'https://www.kuaikanmanhua.com',
         changeOrigin: true,
         rewrite: path => path.replace(/^\/api/, ''),
       },
+      /**
+       *      配置后/api就是代理了target配置的地址（ https://www.kuaikanmanhua.com）
+       *     可以理解为: /api 等于 https://www.kuaikanmanhua.com
+       *     所以不需要配置 axios 的 baseUrl 了，切记。
+       *     https://www.cnblogs.com/yayuya/p/17035869.html
+       */
     },
   },
 })
