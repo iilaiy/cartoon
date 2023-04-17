@@ -1,5 +1,10 @@
-import { createPinia } from 'pinia'
+import { defineStore } from 'pinia'
 
-const store = createPinia()
-
-export default store
+export const useSotre = defineStore('sotre', {
+  state: () => {
+    return {
+      // 控制加载组件显示隐藏
+      vshow: true,
+    }
+  },
+})

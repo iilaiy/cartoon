@@ -1,35 +1,23 @@
 <template>
-  <div>
+  <div class="contents-cmp" v-if="list">
     <div class="r-title">{{ title }}</div>
-    <div class="content">
-      <div class="cbox" v-for="item in list" :key="item.id">
+    <div class="content" id="content">
+      <div class="cbox" v-for="item in list.banner_list" :key="item.id">
         <div class="img-box">
-          <img v-lazy="item.vertical_image_url" />
-          <template v-if="item.sub_title">
-            <div class="concern text-one-hidden">{{ item.sub_title }}</div>
-          </template>
-          <template v-else-if="item.likes_count != 0">
-            <div class="concern text-one-hidden">
-              {{ item.likes_count }}关注
-            </div>
-          </template>
+          <img v-lazy="item.image" />
+          <div class="concern text-one-hidden">
+            {{ item.right_bottom }}
+          </div>
         </div>
         <div class="b-title text-one-hidden">
           {{ item.title }}
         </div>
         <div class="tags text-one-hidden">
-          <template v-if="Array.isArray(item.tags)">
-            <span v-for="(val, index) in item.tags" :key="index">{{
-              val
-            }}</span>
-          </template>
-          <template v-else>
-            <span>{{ item.corner_text }}</span>
-          </template>
+          <span>{{ item.sub_title }}</span>
         </div>
       </div>
     </div>
-    <div class="card">
+    <div class="card" v-if="list.show_more">
       <div class="box" @click="moreChange($event)">查看更多</div>
       <div class="box" @click="moreChange($event)">换一换</div>
     </div>
@@ -37,7 +25,6 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from 'vue'
 const emit = defineEmits(['ContentsCmpClick'])
 
 const props = defineProps({
@@ -45,7 +32,7 @@ const props = defineProps({
     type: String,
   },
   list: {
-    type: Array,
+    type: Object,
   },
 })
 
@@ -56,26 +43,26 @@ const moreChange = e => {
 
 <style scoped lang="scss">
 .r-title {
-  width: 95%;
-  margin: 0 auto;
   font-size: 0.42rem;
-  font-weight: bold;
+  font-weight: 600;
 }
 .content {
-  width: 95%;
-  margin: 0 auto;
+  height: 11.4rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   .cbox {
-    width: 31.8%;
+    width: 32.5%;
+    height: 5.4rem;
     margin-top: 0.3rem;
     .b-title {
       width: 100%;
-      font-size: 0.35rem;
-      margin: 0.2rem 0 0.1rem 0;
+      font-size: 0.4rem;
+      margin-top: 0.2rem;
     }
     .img-box {
+      height: 4.1rem;
+      overflow: hidden;
       position: relative;
       img {
         border-radius: 0.05rem;
@@ -95,25 +82,22 @@ const moreChange = e => {
       }
     }
     .tags {
-      font-size: 0.3rem;
+      font-size: 0.35rem;
       color: #9999a5;
-      span {
-        margin-right: 0.1rem;
-      }
     }
   }
 }
 .card {
   display: flex;
   justify-content: space-between;
-  margin: 0.5rem 0.24rem;
+  margin: 0.5rem 0;
   .box {
-    font-size: 0.34rem;
+    font-size: 0.36rem;
     color: #666666;
     text-align: center;
-    width: calc(50% - 0.12rem);
-    height: 1rem;
-    line-height: 1rem;
+    width: calc(50% - 0.1rem);
+    height: 1.1rem;
+    line-height: 1.1rem;
     background-color: #f7f7f8;
   }
 }

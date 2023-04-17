@@ -1,18 +1,21 @@
 /****   request.js   ****/
 // 导入axios
 import axios from 'axios'
-// import evn from './env.js'
 // 做消息提醒
 import { showFailToast } from 'vant'
-//1. 创建新的axios实例，
 
-const service = axios.create({
-  // baseURL: evn.http.baseURL,
+// 创建新的axios实例
+const requests = axios.create({
   // 超时时间 单位是ms，这里设置了5s的超时时间
   timeout: 5 * 1000,
+  // 设置全局重试请求次数
+  retry: 3,
+  // 设置全局请求间隔
+  retryDelay: 1000,
 })
-// 2.请求拦截器
-service.interceptors.request.use(
+
+// 请求拦截器
+requests.interceptors.request.use(
   config => {
     //发请求前做的一些处理，数据转化，配置请求头，设置token,设置loading等，根据需求去添加
     config.data = JSON.stringify(config.data) //数据转化,也可以使用qs转换
@@ -32,72 +35,58 @@ service.interceptors.request.use(
   }
 )
 
-// 3.响应拦截器
-service.interceptors.response.use(
+// 响应拦截器
+requests.interceptors.response.use(
   response => {
     //接收到响应数据并成功后的一些共有的处理，关闭loading等
 
-    return response
+    return response.data
   },
   error => {
-    // console.log(error)
-    /***** 接收到异常响应的处理开始 *****/
-    if (error && error.response) {
-      // 1.公共错误处理
-      // 2.根据响应码具体处理
-      switch (error.response.status) {
-        case 400:
-          error.message = '错误请求'
-          break
-        case 401:
-          error.message = '未授权，请重新登录'
-          break
-        case 403:
-          error.message = '拒绝访问'
-          break
-        case 404:
-          error.message = '请求错误,未找到该资源'
-          break
-        case 405:
-          error.message = '请求方法未允许'
-          break
-        case 408:
-          error.message = '请求超时'
-          break
-        case 500:
-          error.message = '服务器端出错'
-          break
-        case 501:
-          error.message = '网络未实现'
-          break
-        case 502:
-          error.message = '网络错误'
-          break
-        case 503:
-          error.message = '服务不可用'
-          break
-        case 504:
-          error.message = '网络超时'
-          break
-        case 505:
-          error.message = 'http版本不支持该请求'
-          break
-        default:
-          error.message = `连接错误${error.response.status}`
-      }
-    } else {
-      // 超时处理
-      if (JSON.stringify(error).includes('timeout')) {
-        showFailToast('服务器响应超时，请刷新当前页')
-      }
-      error.message = '连接服务器失败'
+    // 超时处理
+    var config = error.config
+    if (!config || !config.retry) return Promise.reject(error)
+
+    //如果有响应内容，就直接返回错误信息，不再发送请求
+    if (error.response.data) {
+      return Promise.reject({ type: 'error', msg: error.response.data })
     }
 
-    showFailToast(error.message)
-    /***** 处理结束 *****/
-    //如果不需要错误处理，以上的处理过程都可省略
-    return Promise.resolve(error.response)
+    // __retryCount用来记录当前是第几次发送请求
+    config.__retryCount = config.__retryCount || 0
+
+    // 如果当前发送的请求大于等于设置好的请求次数时，不再发送请求，返回最终的错误信息
+    if (config.__retryCount >= config.retry) {
+      let err = {}
+      if (error.message === 'Network Error') {
+        //message为"Network Error"代表断网了
+        err = { type: 'warning', msg: '网络连接已断开，请检查网络' }
+      } else if (error.message === 'timeout of 5000ms exceeded') {
+        //网太慢了，5秒内没有接收到数据，这里的5000ms对应上方timeout设置的值
+        err = { type: 'warning', msg: '请求超时，请检查网络' }
+      } else {
+        //除以上两种以外的所有错误，包括接口报错 400 500 之类的
+        err = { type: 'error', msg: '出现错误，请稍后再试' }
+      }
+      showFailToast(err.msg)
+      return Promise.reject(err)
+    }
+
+    // 记录请求次数+1
+    config.__retryCount += 1
+
+    // 设置请求间隔 在发送下一次请求之前停留一段时间，时间为上方设置好的请求间隔时间
+    var backoff = new Promise(function (resolve) {
+      setTimeout(function () {
+        resolve()
+      }, config.retryDelay || 1)
+    })
+
+    // 再次发送请求
+    return backoff.then(function () {
+      return requests(config)
+    })
   }
 )
-//4.导入文件
-export default service
+// 导出文件
+export default requests

@@ -1,8 +1,6 @@
 <template>
   <div class="cartoon-top" @click.prevent>
-    <!--  顶部  -->
     <div class="htop">
-      <!-- logo -->
       <div class="logo">
         <img :src="logo" alt="" />
       </div>
@@ -23,12 +21,7 @@
 </template>
 
 <script setup>
-// import { ref } from "vue"
-import logo from '@/assets/images/cartoon.png'
-
-/**
- * 点击跳转搜索页面
- */
+import logo from '@/assets/images/logo.png'
 </script>
 
 <style scoped lang="scss">
@@ -67,6 +60,9 @@ import logo from '@/assets/images/cartoon.png'
         float: left;
         width: 0.6rem;
         margin-right: 0.1rem;
+      }
+      span {
+        font-size: 0.35rem;
       }
     }
   }

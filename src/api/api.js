@@ -8,7 +8,7 @@ import request from './request.js'
  */
 export function getCartoonInfo() {
   return request({
-    url: '/api/v2/pweb/home',
+    url: '/mapi/v1/comic/mkuaikan/discovery/list',
     method: 'get',
   })
 }
@@ -25,9 +25,14 @@ export function getLatestInfo() {
 
 /**
  * 获获取分类数据
+ * @param params 请求参数
+ *  count 返回数量
+ *  tag 分类
+ *  sort 排序
+ *  update_status 书本状态
  */
 export function getCategoryInfo(params = {}) {
-  let data = {
+  const data = {
     count: params.count || 24,
     tag: params.tag || 0,
     sort: params.sort || 1,
@@ -54,6 +59,29 @@ export function getCategoryInfo(params = {}) {
 export function getListInfo() {
   return request({
     url: '/api/v2/pweb/all_rank/topics',
+    method: 'get',
+  })
+}
+
+/**
+ * 获取原创数据
+ */
+export function getOriginalInfo() {
+  return request({
+    url: '/api/v2/pweb/ugc/rec_topics',
+    method: 'get',
+  })
+}
+
+/**
+ * 获取每日更新
+ * @param params 请求参数
+ * pos 星期几 0~6
+ */
+export function getUpdatedDailyInfo(params) {
+  const data = params || 0
+  return request({
+    url: '/api/v2/pweb/daily/topics?pos=' + data,
     method: 'get',
   })
 }

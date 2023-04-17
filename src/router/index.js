@@ -5,10 +5,28 @@ const routes = [
     path: '/',
     name: 'Home',
     meta: {
-      title: '首页',
+      title: '发现',
       keepAlive: true,
     },
-    component: () => import('@/views/CartoonHome/CartoonHome.vue'),
+    component: () => import('@/views/CartoonDiscover/CartoonDiscover.vue'),
+  },
+  {
+    path: '/recommend',
+    name: 'Recommend',
+    meta: {
+      title: '推荐',
+      keepAlive: true,
+    },
+    component: () => import('@/views/CartoonRecommend/CartoonRecommend.vue'),
+  },
+  {
+    path: '/world',
+    name: 'World',
+    meta: {
+      title: '世界',
+      keepAlive: true,
+    },
+    component: () => import('@/views/CartoonWorld/CartoonWorld.vue'),
   },
 ]
 

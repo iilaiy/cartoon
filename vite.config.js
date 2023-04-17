@@ -12,6 +12,7 @@ export default defineConfig({
     },
   },
   plugins: [vue()],
+  base: '/',
   css: {
     postcss: {
       plugins: [
@@ -31,6 +32,11 @@ export default defineConfig({
         target: 'https://www.kuaikanmanhua.com',
         changeOrigin: true,
         rewrite: path => path.replace(/^\/api/, ''),
+      },
+      '/mapi': {
+        target: 'https://m.kuaikanmanhua.com/mini',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/mapi/, ''),
       },
       /**
        *      配置后/api就是代理了target配置的地址（ https://www.kuaikanmanhua.com）
