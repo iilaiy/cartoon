@@ -6,7 +6,7 @@
       indicator-color="white"
       duration="400"
     >
-      <van-swipe-item v-for="(item, index) in list.banner_list" :key="index">
+      <van-swipe-item v-for="(item, index) in bannerList" :key="index">
         <img :src="item.image" alt="" />
       </van-swipe-item>
     </van-swipe>
@@ -14,10 +14,20 @@
 </template>
 
 <script setup>
-defineProps({
+import { computed } from 'vue'
+
+const props = defineProps({
   list: {
     type: Object,
   },
+})
+
+const bannerList = computed(() => {
+  const arr = props.list.banner_list
+  if (arr.length === 1) {
+    arr.push(arr[0])
+  }
+  return arr
 })
 </script>
 

@@ -25,6 +25,7 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 const emit = defineEmits(['ContentsCmpClick'])
 
 const props = defineProps({
@@ -33,8 +34,12 @@ const props = defineProps({
   },
   num: {
     type: Number,
-    defalut: 3,
   },
+})
+
+const column = computed(() => {
+  const num = props.num || 3
+  return Object.assign(num, props.num)
 })
 
 const moreChange = e => {
@@ -53,7 +58,7 @@ const moreChange = e => {
   flex-wrap: wrap;
   justify-content: space-between;
   .cbox {
-    width: calc(97% / v-bind(num));
+    width: calc(97% / v-bind(column));
     height: 5.4rem;
     margin-top: 0.3rem;
     .b-title {
@@ -97,8 +102,8 @@ const moreChange = e => {
     color: #666666;
     text-align: center;
     width: calc(50% - 0.1rem);
-    height: 1.1rem;
-    line-height: 1.1rem;
+    height: 1rem;
+    line-height: 1rem;
     background-color: #f7f7f8;
   }
 }

@@ -1,91 +1,42 @@
 <template>
-  <CartoonHeader v-if="!$store.vshow"></CartoonHeader>
-  <main class="main" v-if="!$store.vshow">
-    <TopTabBar>
-      <DiscoverSwiper :list="homeArray.data[0]"></DiscoverSwiper>
-      <TabMenu :list="homeArray.data[1]"></TabMenu>
-      <div class="content">
-        <ContentsCmp
-          v-for="(item, index) in selectCartoonList"
-          :key="index"
-          :list="item"
-          :num="3"
-          @ContentsCmpClick="ContentsCmpHandler"
-        ></ContentsCmp>
-      </div>
-    </TopTabBar>
-  </main>
+  <div class="container" v-if="!$store.vshow">
+    <CartoonHeader></CartoonHeader>
+    <main class="main">
+      <TopTabBar>
+        <DiscoverSwiper :list="bannerList.data"></DiscoverSwiper>
+        <TabMenu :list="topTabBarList.data"></TabMenu>
+        <div class="content">
+          <ContentsCmp
+            v-for="(item, index) in module_type4"
+            :key="index"
+            :list="item"
+            @ContentsCmpClick="ContentsCmpHandler"
+          ></ContentsCmp>
+        </div>
+      </TopTabBar>
+    </main>
+  </div>
 </template>
 
 <script setup>
-import { computed, getCurrentInstance, reactive } from 'vue'
+import { getCurrentInstance, reactive } from 'vue'
 import DiscoverSwiper from './components/DiscoverSwiper.vue'
 import TabMenu from './components/TabMenu.vue'
 import ContentsCmp from './components/ContentsCmp.vue'
 import CartoonHeader from '@/components/CartoonHeader.vue'
 import TopTabBar from '@/components/TopTabBar.vue'
-import {
-  getCartoonInfo,
-  getUpdatedDailyInfo,
-  getChangeCartoonInfo,
-} from '@/api/api.js'
+import { getCartoonInfo, getChangeCartoonInfo } from '@/api/api.js'
 const { appContext } = getCurrentInstance()
 const global = appContext.config.globalProperties
 
-// 首页数据
-const homeArray = reactive({ data: [] })
-
-// 每日更新
-// const dailyUpdateList = reactive({ data: [] })
-// const dailyUpdateStatus = reactive({
-//   title: '每日更新',
-//   pageIndex: 1,
-//   pageNum: 6,
-//   pageSum: 1,
-//   newList: [],
-// })
-
-/**
- * 数据处理
- * @function selectCartoonList
- *  module_type === 4
- */
-const selectCartoonList = computed(() => {
-  const arr = []
-  homeArray.data.map(item => {
-    if (item.module_type === 4) {
-      arr.push(item)
-    }
-  })
-  return arr
-})
-
-// const cartoonCalculationHandler = (obj, list, callback) => {
-//   obj.pageSum = parseInt(
-//     list.length / obj.pageNum + (list.length % obj.pageNum > 0),
-//   )
-//   callback(obj, list)
-// }
-// const selectCartoonList = (obj, list, bool = false) => {
-//   if (bool) {
-//     if (obj.pageIndex < obj.pageSum) {
-//       obj.pageIndex++
-//     } else {
-//       obj.pageIndex = 1
-//     }
-//   }
-//   obj.newList = []
-//   list.map((item, index) => {
-//     if (
-//       (obj.pageIndex - 1) * obj.pageNum <= index &&
-//       index < (obj.pageIndex - 1) * obj.pageNum + obj.pageNum
-//     ) {
-//       obj.newList.push(item)
-//       // 当数组长度满足一次渲染的条数时不再继续循环
-//       if (obj.newList.length === obj.pageNum) return
-//     }
-//   })
-// }
+// banner
+const bannerList = reactive({ data: {} })
+// top-tab-bar
+const topTabBarList = reactive({ data: {} })
+// module_type === 4
+const module_type4 = reactive([])
+// module_type === 5
+const module_type5 = reactive([])
 
 /**
  * 查看更多&换一换
@@ -100,9 +51,9 @@ const ContentsCmpHandler = obj => {
         filter_ids: obj.list.filter_ids,
         card_type: obj.list.card_type,
       }).then(res => {
-        homeArray.data.map((item, index) => {
+        module_type4.map((item, index) => {
           if (item.module_id === res.data.module_info.module_id) {
-            homeArray.data[index] = res.data.module_info
+            module_type4[index] = res.data.module_info
           }
         })
       })
@@ -115,21 +66,26 @@ const ContentsCmpHandler = obj => {
  */
 const getDataAll = async () => {
   try {
-    let times = new Date()
+    // let times = new Date()
     const res = await getCartoonInfo()
     // 当所有数据请求完毕再进行数据渲染
-    const res2 = await getUpdatedDailyInfo(times.getDay())
     console.log('首页数据 --- 😊')
     console.log(res)
-    console.log('每日数据 --- 😊')
-    console.log(res2)
-    homeArray.data = res.data.infos
-    // dailyUpdateList.data = res2.data.topics
-    // cartoonCalculationHandler(
-    //   dailyUpdateStatus,
-    //   dailyUpdateList.data,
-    //   selectCartoonList,
-    // )
+    res.data.infos.map(item => {
+      switch (item.module_type) {
+        case 1:
+          bannerList.data = item
+          break
+        case 2:
+          topTabBarList.data = item
+          break
+        case 4:
+          module_type4.push(item)
+          break
+        case 5:
+        // module_type5
+      }
+    })
     // 隐藏加载组件
     global.$store.vshow = false
   } catch (error) {
