@@ -34,7 +34,7 @@ export default defineConfig({
         rewrite: path => path.replace(/^\/api/, ''),
       },
       '/mapi': {
-        target: 'https://m.kuaikanmanhua.com/mini',
+        target: 'https://m.kuaikanmanhua.com',
         changeOrigin: true,
         rewrite: path => path.replace(/^\/mapi/, ''),
       },

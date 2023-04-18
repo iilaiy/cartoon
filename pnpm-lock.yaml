@@ -4,9 +4,15 @@ dependencies:
   axios:
     specifier: ^1.3.5
     version: 1.3.5
+  js-cookie:
+    specifier: ^3.0.1
+    version: 3.0.1
   pinia:
     specifier: ^2.0.34
     version: 2.0.34(typescript@5.0.4)(vue@3.2.47)
+  pnpm:
+    specifier: ^8.2.0
+    version: 8.2.0
   qs:
     specifier: ^6.11.1
     version: 6.11.1
@@ -2075,6 +2081,11 @@ packages:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
     dev: true
 
+  /js-cookie@3.0.1:
+    resolution: {integrity: sha512-+0rgsUXZu4ncpPxRL+lNEptWMOWl9etvPHc/koSRp6MPwpRYAhmk0dUG00J4bxVV3r9uUzfo24wW0knS07SKSw==}
+    engines: {node: '>=12'}
+    dev: false
+
   /js-sdsl@4.4.0:
     resolution: {integrity: sha512-FfVSdx6pJ41Oa+CF7RDaFmTnCaFhua+SNYQX74riGOpl96x+2jQCqEfQ2bnXu/5DPCqlRuiqyvTJM0Qjz26IVg==}
     dev: true
@@ -2642,6 +2653,12 @@ packages:
       typescript: 5.0.4
       vue: 3.2.47
       vue-demi: 0.14.0(vue@3.2.47)
+    dev: false
+
+  /pnpm@8.2.0:
+    resolution: {integrity: sha512-f2/abl6GycxLgVZQtWA2zBJKMXcv2L86HGRwJ4qnS02gVzLgtFegC25qWKFtUunCY74GUwxq2A7yGAJEyOuCYg==}
+    engines: {node: '>=16.14'}
+    hasBin: true
     dev: false
 
   /postcss-pxtorem@6.0.0(postcss@8.4.21):

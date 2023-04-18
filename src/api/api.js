@@ -1,14 +1,43 @@
 import request from './request.js'
 // import qs from 'qs'
 
-// https://blog.csdn.net/m0_46521785/article/details/120093321?ydreferer=aHR0cHM6Ly93d3cuYmFpZHUuY29tL2xpbms%2FdXJsPVdhc2N0ZFplaGdfOXExOWtwOTc4ak9DSG5SYkJIdFhjdkdVdEFWbFpBLVdqZnJ0Q3BrN0JkdngyUFF2RDVNTzZHTTJMYi1ydE5CRkkyNW5UVW9UYU9iZjdDVHRMeC05VkZrYTVGaTQ4SkRXJndkPSZlcWlkPTlmNGMxODE4MDAxN2U3MDcwMDAwMDAwNjY0M2FhYTY4
-
 /**
  * 获取首页数据
+ * @param 请求参数
+ *  diffServerTimestamp 差异服务器时间戳
  */
 export function getCartoonInfo() {
   return request({
-    url: '/mapi/v1/comic/mkuaikan/discovery/list',
+    url:
+      '/mapi/mini/v1/comic/mkuaikan/discovery/list?diffServerTimestamp=' +
+      Date.now() +
+      '&gender=0&cold_boot=0',
+    method: 'get',
+  })
+}
+
+/**
+ * 获取每日更新
+ * @param params 请求参数
+ * pos 星期几 0~6
+ */
+export function getUpdatedDailyInfo(params) {
+  const data = params || 0
+  return request({
+    url: '/api/v2/pweb/daily/topics?pos=' + data,
+    method: 'get',
+  })
+}
+
+/**
+ * 换一换模块
+ * @returns
+ */
+export function getChangeCartoonInfo(params) {
+  return request({
+    url: `/mapi/mini/v1/comic/mkuaikan/discovery/module_change?diffServerTimestamp=${Date.now()}&module_id=${
+      params.module_id
+    }&filter_ids=${params.filter_ids}&card_type=${params.card_type}&gender=0`,
     method: 'get',
   })
 }
@@ -69,19 +98,6 @@ export function getListInfo() {
 export function getOriginalInfo() {
   return request({
     url: '/api/v2/pweb/ugc/rec_topics',
-    method: 'get',
-  })
-}
-
-/**
- * 获取每日更新
- * @param params 请求参数
- * pos 星期几 0~6
- */
-export function getUpdatedDailyInfo(params) {
-  const data = params || 0
-  return request({
-    url: '/api/v2/pweb/daily/topics?pos=' + data,
     method: 'get',
   })
 }

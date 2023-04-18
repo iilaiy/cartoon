@@ -8,8 +8,9 @@
         <ContentsCmp
           v-for="(item, index) in selectCartoonList"
           :key="index"
-          :title="item.title"
           :list="item"
+          :num="3"
+          @ContentsCmpClick="ContentsCmpHandler"
         ></ContentsCmp>
       </div>
     </TopTabBar>
@@ -23,7 +24,11 @@ import TabMenu from './components/TabMenu.vue'
 import ContentsCmp from './components/ContentsCmp.vue'
 import CartoonHeader from '@/components/CartoonHeader.vue'
 import TopTabBar from '@/components/TopTabBar.vue'
-import { getCartoonInfo, getUpdatedDailyInfo } from '@/api/api.js'
+import {
+  getCartoonInfo,
+  getUpdatedDailyInfo,
+  getChangeCartoonInfo,
+} from '@/api/api.js'
 const { appContext } = getCurrentInstance()
 const global = appContext.config.globalProperties
 
@@ -83,23 +88,27 @@ const selectCartoonList = computed(() => {
 // }
 
 /**
- * 事件函数
+ * 查看更多&换一换
  */
-// const ContentsCmpHandler = obj => {
-//   switch (obj.type) {
-//     case '查看更多':
-//       break
-//     case '换一换':
-//       switch (
-//         obj.name
-//         // case dailyUpdateStatus.title:
-//         //   selectCartoonList(dailyUpdateStatus, dailyUpdateList.data, true)
-//         // break
-//       ) {
-//       }
-//       break
-//   }
-// }
+const ContentsCmpHandler = obj => {
+  switch (obj.type) {
+    case '查看更多':
+      break
+    case '换一换':
+      getChangeCartoonInfo({
+        module_id: obj.list.module_id,
+        filter_ids: obj.list.filter_ids,
+        card_type: obj.list.card_type,
+      }).then(res => {
+        homeArray.data.map((item, index) => {
+          if (item.module_id === res.data.module_info.module_id) {
+            homeArray.data[index] = res.data.module_info
+          }
+        })
+      })
+      break
+  }
+}
 
 /**
  * 统一数据请求

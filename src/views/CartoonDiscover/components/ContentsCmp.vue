@@ -1,6 +1,6 @@
 <template>
   <div class="contents-cmp" v-if="list">
-    <div class="r-title">{{ title }}</div>
+    <div class="r-title">{{ list.title }}</div>
     <div class="content" id="content">
       <div class="cbox" v-for="item in list.banner_list" :key="item.id">
         <div class="img-box">
@@ -28,22 +28,23 @@
 const emit = defineEmits(['ContentsCmpClick'])
 
 const props = defineProps({
-  title: {
-    type: String,
-  },
   list: {
     type: Object,
+  },
+  num: {
+    type: Number,
+    defalut: 3,
   },
 })
 
 const moreChange = e => {
-  emit('ContentsCmpClick', { name: props.title, type: e.target.innerText })
+  emit('ContentsCmpClick', { list: props.list, type: e.target.innerText })
 }
 </script>
 
 <style scoped lang="scss">
 .r-title {
-  font-size: 0.42rem;
+  font-size: 0.44rem;
   font-weight: 600;
 }
 .content {
@@ -52,7 +53,7 @@ const moreChange = e => {
   flex-wrap: wrap;
   justify-content: space-between;
   .cbox {
-    width: 32.5%;
+    width: calc(97% / v-bind(num));
     height: 5.4rem;
     margin-top: 0.3rem;
     .b-title {

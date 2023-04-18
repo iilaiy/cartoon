@@ -6,10 +6,11 @@ import router from './router'
 import { createPinia } from 'pinia'
 import Vant from 'vant'
 import { Lazyload } from 'vant'
-import 'vant/lib/index.css'
-import getAssetsImages from './utils/getAssetsImages'
 import 'amfe-flexible'
+import Cookies from 'js-cookie'
+import getAssetsImages from './utils/getAssetsImages'
 import { useSotre } from '@/store/index.js'
+import 'vant/lib/index.css'
 
 const app = createApp(App)
 
@@ -22,5 +23,6 @@ app.use(Lazyload, {
 const store = useSotre()
 app.config.globalProperties.$store = store
 app.config.globalProperties.getAssetsImages = getAssetsImages
+app.config.globalProperties.$Cookies = Cookies
 
 app.mount('#app')
