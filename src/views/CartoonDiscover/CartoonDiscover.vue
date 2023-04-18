@@ -1,5 +1,6 @@
 <template>
   <div class="container" v-if="!$store.vshow">
+    <van-loading type="spinner" class="loading" v-if="changeLoadingShow" />
     <CartoonHeader></CartoonHeader>
     <main class="main">
       <TopTabBar>
@@ -10,9 +11,10 @@
             v-for="(item, index) in module_type4"
             :key="index"
             :list="item"
-            @ContentsCmpClick="ContentsCmpHandler"
+            @cartoonChange="cartoonChangeHandler"
+            :loadingShow="changeLoadingShow"
           ></ContentsCmp>
-          <!-- <CartoonListInfo :topTabBarList="module_type5[0]"></CartoonListInfo> -->
+          <CartoonListInfo :listInfo="module_type5[0]"></CartoonListInfo>
         </div>
       </TopTabBar>
     </main>
@@ -20,11 +22,11 @@
 </template>
 
 <script setup>
-import { getCurrentInstance, reactive } from 'vue'
+import { getCurrentInstance, reactive, ref } from 'vue'
 import DiscoverSwiper from './components/DiscoverSwiper.vue'
 import TabMenu from './components/TabMenu.vue'
 import ContentsCmp from './components/ContentsCmp.vue'
-// import CartoonListInfo from './components/CartoonListInfo.vue'
+import CartoonListInfo from './components/CartoonListInfo.vue'
 import CartoonHeader from '@/components/CartoonHeader.vue'
 import TopTabBar from '@/components/TopTabBar.vue'
 import { getCartoonInfo, getChangeCartoonInfo } from '@/api/api.js'
@@ -39,28 +41,25 @@ const topTabBarList = reactive([])
 const module_type4 = reactive([])
 // module_type === 5
 const module_type5 = reactive([])
-
+// 控制换一换模块加载组件
+const changeLoadingShow = ref(false)
 /**
- * 查看更多&换一换
+ * 换一换
  */
-const ContentsCmpHandler = obj => {
-  switch (obj.type) {
-    case '查看更多':
-      break
-    case '换一换':
-      getChangeCartoonInfo({
-        module_id: obj.list.module_id,
-        filter_ids: obj.list.filter_ids,
-        card_type: obj.list.card_type,
-      }).then(res => {
-        module_type4.map((item, index) => {
-          if (item.module_id === res.data.module_info.module_id) {
-            module_type4[index] = res.data.module_info
-          }
-        })
-      })
-      break
-  }
+const cartoonChangeHandler = list => {
+  changeLoadingShow.value = true
+  getChangeCartoonInfo({
+    module_id: list.module_id,
+    filter_ids: list.filter_ids,
+    card_type: list.card_type,
+  }).then(res => {
+    module_type4.map((item, index) => {
+      if (item.module_id === res.data.module_info.module_id) {
+        module_type4[index] = res.data.module_info
+      }
+    })
+    changeLoadingShow.value = false
+  })
 }
 
 /**

@@ -18,15 +18,15 @@
       </div>
     </div>
     <div class="card" v-if="list.show_more">
-      <div class="box" @click="moreChange($event)">查看更多</div>
-      <div class="box" @click="moreChange($event)">换一换</div>
+      <div class="box">查看更多</div>
+      <div class="box" @click="ChangeHandler">换一换</div>
     </div>
   </div>
 </template>
 
 <script setup>
 import { computed } from 'vue'
-const emit = defineEmits(['ContentsCmpClick'])
+const emit = defineEmits(['cartoonChange'])
 
 const props = defineProps({
   list: {
@@ -35,6 +35,10 @@ const props = defineProps({
   num: {
     type: Number,
   },
+  // 节流
+  loadingShow: {
+    type: Boolean,
+  },
 })
 
 const column = computed(() => {
@@ -42,8 +46,11 @@ const column = computed(() => {
   return Object.assign(num, props.num)
 })
 
-const moreChange = e => {
-  emit('ContentsCmpClick', { list: props.list, type: e.target.innerText })
+const ChangeHandler = e => {
+  // 设置节流
+  if (!props.loadingShow) {
+    emit('cartoonChange', props.list)
+  }
 }
 </script>
 

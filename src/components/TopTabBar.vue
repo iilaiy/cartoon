@@ -5,7 +5,7 @@
       :key="index"
       :title="cmp.title"
       :to="cmp.routerPath"
-      :title-style="{ 'font-size': '.42rem', color: '#000000' }"
+      :title-style="titleStyle"
     >
       <slot></slot>
     </van-tab>
@@ -18,6 +18,10 @@ import { useRoute } from 'vue-router'
 const route = useRoute()
 
 let active = ref(0)
+const titleStyle = {
+  fontSize: '.42rem',
+  color: '#000000',
+}
 const topTabBarCmpList = reactive([
   {
     title: '发现',

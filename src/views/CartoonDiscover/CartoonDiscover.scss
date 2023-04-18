@@ -2,3 +2,12 @@
   width: 95%;
   margin: 0 auto;
 }
+/* 换一换模块加载组件 */
+.loading {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(141, 153, 153);
+  z-index: 999;
+}
