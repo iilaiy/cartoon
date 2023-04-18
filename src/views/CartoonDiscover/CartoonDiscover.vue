@@ -3,8 +3,8 @@
     <CartoonHeader></CartoonHeader>
     <main class="main">
       <TopTabBar>
-        <DiscoverSwiper :list="bannerList.data"></DiscoverSwiper>
-        <TabMenu :list="topTabBarList.data"></TabMenu>
+        <DiscoverSwiper :list="bannerList[0]"></DiscoverSwiper>
+        <TabMenu :list="topTabBarList[0]"></TabMenu>
         <div class="content">
           <ContentsCmp
             v-for="(item, index) in module_type4"
@@ -30,9 +30,9 @@ const { appContext } = getCurrentInstance()
 const global = appContext.config.globalProperties
 
 // banner
-const bannerList = reactive({ data: {} })
+const bannerList = reactive([])
 // top-tab-bar
-const topTabBarList = reactive({ data: {} })
+const topTabBarList = reactive([])
 // module_type === 4
 const module_type4 = reactive([])
 // module_type === 5
@@ -74,16 +74,16 @@ const getDataAll = async () => {
     res.data.infos.map(item => {
       switch (item.module_type) {
         case 1:
-          bannerList.data = item
+          bannerList.push(item)
           break
         case 2:
-          topTabBarList.data = item
+          topTabBarList.push(item)
           break
         case 4:
           module_type4.push(item)
           break
         case 5:
-        // module_type5
+          module_type5.push(item)
       }
     })
     // 隐藏加载组件
