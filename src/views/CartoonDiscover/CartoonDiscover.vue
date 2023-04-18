@@ -12,6 +12,7 @@
             :list="item"
             @ContentsCmpClick="ContentsCmpHandler"
           ></ContentsCmp>
+          <!-- <CartoonListInfo :topTabBarList="module_type5[0]"></CartoonListInfo> -->
         </div>
       </TopTabBar>
     </main>
@@ -23,6 +24,7 @@ import { getCurrentInstance, reactive } from 'vue'
 import DiscoverSwiper from './components/DiscoverSwiper.vue'
 import TabMenu from './components/TabMenu.vue'
 import ContentsCmp from './components/ContentsCmp.vue'
+// import CartoonListInfo from './components/CartoonListInfo.vue'
 import CartoonHeader from '@/components/CartoonHeader.vue'
 import TopTabBar from '@/components/TopTabBar.vue'
 import { getCartoonInfo, getChangeCartoonInfo } from '@/api/api.js'
@@ -69,8 +71,8 @@ const getDataAll = async () => {
     // let times = new Date()
     const res = await getCartoonInfo()
     // 当所有数据请求完毕再进行数据渲染
-    console.log('首页数据 --- 😊')
     console.log(res)
+    console.log(' ↑------------- 首页数据 ----------------↑')
     res.data.infos.map(item => {
       switch (item.module_type) {
         case 1:
@@ -84,6 +86,7 @@ const getDataAll = async () => {
           break
         case 5:
           module_type5.push(item)
+          break
       }
     })
     // 隐藏加载组件

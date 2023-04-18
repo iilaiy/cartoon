@@ -27,11 +27,11 @@ import logo from '@/assets/images/logo.png'
 <style scoped lang="scss">
 .cartoon-top {
   .htop {
-    height: 1.3rem;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-around;
-    margin-bottom: 0.1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.1rem;
     .common {
       display: flex;
       align-items: center;

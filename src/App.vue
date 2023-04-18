@@ -1,4 +1,15 @@
-<script setup></script>
+<script setup>
+window.onload = function () {
+  document.addEventListener('touchstart', function (event) {
+    if (event.touches.length > 1) {
+      event.preventDefault()
+    }
+  })
+  document.addEventListener('gesturestart', function (event) {
+    event.preventDefault()
+  })
+}
+</script>
 
 <template>
   <van-overlay :show="$store.vshow" z-index="999">
