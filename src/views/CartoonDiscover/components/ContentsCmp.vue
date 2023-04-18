@@ -46,7 +46,7 @@ const column = computed(() => {
   return Object.assign(num, props.num)
 })
 
-const ChangeHandler = e => {
+const ChangeHandler = () => {
   // 设置节流
   if (!props.loadingShow) {
     emit('cartoonChange', props.list)
