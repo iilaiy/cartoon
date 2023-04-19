@@ -17,7 +17,7 @@ export function getCartoonInfo() {
 }
 
 /**
- * 获取每日更新
+ * 获取每日更新 ❌
  * @param params 请求参数
  * pos 星期几 0~6
  */
@@ -43,7 +43,28 @@ export function getChangeCartoonInfo(params) {
 }
 
 /**
- * 获取最新数据
+ * 获取漫画详情数据
+ * @params 请求参数
+ */
+export function getCarrtonDetails(params) {
+  console.log(params)
+  return request({
+    url: `/api/v2/pweb/topic/${params}`,
+  })
+}
+
+/**
+ * 获取漫画章节详情数据
+ * @params 请求参数
+ */
+export function getCarrtonChapterDetails(params) {
+  return request({
+    url: `/mapi/v2/mweb/comic/${params}`,
+  })
+}
+
+/**
+ * 获取最新数据 ❌
  */
 export function getLatestInfo() {
   return request({
@@ -53,7 +74,7 @@ export function getLatestInfo() {
 }
 
 /**
- * 获获取分类数据
+ * 获获取分类数据 ❌
  * @param params 请求参数
  *  count 返回数量
  *  tag 分类
@@ -83,7 +104,7 @@ export function getCategoryInfo(params = {}) {
 }
 
 /**
- * 获取全部榜单数据
+ * 获取全部榜单数据 ❌
  */
 export function getListInfo() {
   return request({
@@ -93,7 +114,7 @@ export function getListInfo() {
 }
 
 /**
- * 获取原创数据
+ * 获取原创数据 ❌
  */
 export function getOriginalInfo() {
   return request({
