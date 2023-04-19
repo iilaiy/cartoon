@@ -28,6 +28,11 @@ const routes = [
     },
     component: () => import('@/views/CartoonWorld/CartoonWorld.vue'),
   },
+  {
+    path: '/mobile/:id/:page',
+    name: 'Mobile',
+    component: () => import('@/views/CartoonDetails/CartoonDetails.vue'),
+  },
 ]
 
 const router = createRouter({

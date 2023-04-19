@@ -2,7 +2,12 @@
   <div class="contents-cmp" v-if="list">
     <div class="r-title">{{ list.title }}</div>
     <div class="content" id="content">
-      <div class="cbox" v-for="item in list.banner_list" :key="item.id">
+      <div
+        class="cbox"
+        v-for="item in list.banner_list"
+        :key="item.id"
+        @click="toList(item)"
+      >
         <div class="img-box">
           <img v-lazy="item.image" />
           <div class="concern text-one-hidden">
@@ -26,6 +31,8 @@
 
 <script setup>
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const emit = defineEmits(['cartoonChange'])
 
 const props = defineProps({
@@ -51,6 +58,18 @@ const ChangeHandler = () => {
   if (!props.loadingShow) {
     emit('cartoonChange', props.list)
   }
+}
+
+const toList = item => {
+  console.log(item)
+  router.push({
+    path: `/mobile/${item.id}/list`,
+    query: {
+      module_type: props.list.module_type,
+      module_title: props.list.title,
+      module_id: props.list.module_id,
+    },
+  })
 }
 </script>
 
