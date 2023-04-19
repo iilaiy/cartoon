@@ -55,47 +55,20 @@ const ChangeHandler = () => {
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/css/discover/content.scss';
 .r-title {
   font-size: 0.44rem;
   font-weight: 600;
 }
 .content {
-  height: 11.4rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  height: 11rem;
   .cbox {
-    width: calc(97% / v-bind(column));
-    height: 5.4rem;
-    margin-top: 0.3rem;
-    .b-title {
-      width: 100%;
-      font-size: 0.4rem;
-      margin-top: 0.2rem;
-    }
+    height: 5rem;
+    width: calc(97% / v-bind(column)) !important;
     .img-box {
       height: 4.1rem;
-      overflow: hidden;
-      position: relative;
-      img {
-        border-radius: 0.05rem;
-      }
-      .concern {
-        background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.5));
-        bottom: 0;
-        box-sizing: border-box;
-        color: #ffffff;
-        height: 1.4rem;
-        line-height: 2rem;
-        padding-right: 0.1rem;
-        position: absolute;
-        text-align: right;
-        width: 100%;
-        font-size: 0.3rem;
-      }
     }
     .tags {
-      font-size: 0.35rem;
       color: #9999a5;
     }
   }
@@ -103,7 +76,7 @@ const ChangeHandler = () => {
 .card {
   display: flex;
   justify-content: space-between;
-  margin: 0.5rem 0;
+  margin: 0.45rem 0;
   .box {
     font-size: 0.36rem;
     color: #666666;

@@ -8,6 +8,7 @@
         <TabMenu :list="topTabBarList[0]"></TabMenu>
         <div class="content">
           <ContentsCmp
+            class="margin"
             v-for="(item, index) in module_type4"
             :key="index"
             :list="item"
