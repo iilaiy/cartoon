@@ -1,6 +1,6 @@
 <template>
   <!-- 详情 -->
-  <div class="topicDetail" v-if="list">
+  <div class="topicDetail" v-if="!(JSON.stringify(list) == '{}')">
     <van-nav-bar
       :title="list.topic_info.title"
       left-arrow
@@ -24,9 +24,9 @@
     </div>
     <div class="description">
       <div class="classifications">
-        <span v-for="(val, index) in list.topic_info.tags" :key="index">{{
-          val
-        }}</span>
+        <span v-for="(val, index) in list.topic_info.tags" :key="index">
+          {{ val }}
+        </span>
       </div>
       <van-text-ellipsis
         rows="2"
@@ -34,11 +34,21 @@
         expand-text="展开"
         collapse-text="收起"
       />
+      <div class="hidden-scrollbar-box">
+        <div class="authors hidden-scrollbar">
+          <div class="author">
+            <img v-lazy="list.topic_info.user.avatar" alt="" />
+            <span>{{ list.topic_info.user.nickname }}</span>
+          </div>
+        </div>
+      </div>
     </div>
+    <MangaAnthology></MangaAnthology>
   </div>
 </template>
 <script setup>
 import { getCurrentInstance, ref } from 'vue'
+import MangaAnthology from './components/MangaAnthology.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { getCarrtonDetails } from '@/api/api.js'
 const route = useRoute()

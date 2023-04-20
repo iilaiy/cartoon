@@ -1,11 +1,11 @@
 <template>
-  <div class="container" v-if="!$store.vshow">
+  <div class="container" v-if="!(JSON.stringify(discoverData) == '{}')">
     <van-loading type="spinner" class="loading" v-if="changeLoadingShow" />
     <CartoonHeader></CartoonHeader>
     <main class="main">
       <TopTabBar>
-        <DiscoverSwiper :list="bannerList[0]"></DiscoverSwiper>
-        <TabMenu :list="topTabBarList[0]"></TabMenu>
+        <DiscoverSwiper :list="bannerList"></DiscoverSwiper>
+        <TabMenu :list="topTabBarList"></TabMenu>
         <div class="content">
           <ContentsCmp
             class="margin"
@@ -15,7 +15,7 @@
             @cartoonChange="cartoonChangeHandler"
             :loadingShow="changeLoadingShow"
           ></ContentsCmp>
-          <CartoonListInfo :listInfo="module_type5[0]"></CartoonListInfo>
+          <CartoonListInfo :listInfo="module_type5"></CartoonListInfo>
         </div>
       </TopTabBar>
     </main>
@@ -34,14 +34,16 @@ import { getCartoonInfo, getChangeCartoonInfo } from '@/api/api.js'
 const { appContext } = getCurrentInstance()
 const global = appContext.config.globalProperties
 
+// 控制页面渲染
+const discoverData = ref({})
 // banner
-const bannerList = reactive([])
+const bannerList = ref({})
 // top-tab-bar
-const topTabBarList = reactive([])
+const topTabBarList = ref({})
 // module_type === 4
 const module_type4 = reactive([])
 // module_type === 5
-const module_type5 = reactive([])
+const module_type5 = ref({})
 // 控制换一换模块加载组件
 const changeLoadingShow = ref(false)
 /**
@@ -73,19 +75,20 @@ const getDataAll = async () => {
     // 当所有数据请求完毕再进行数据渲染
     console.log(res)
     console.log(' ↑------------- 首页数据 ----------------↑')
+    discoverData.value = res.data
     res.data.infos.map(item => {
       switch (item.module_type) {
         case 1:
-          bannerList.push(item)
+          bannerList.value = item
           break
         case 2:
-          topTabBarList.push(item)
+          topTabBarList.value = item
           break
         case 4:
           module_type4.push(item)
           break
         case 5:
-          module_type5.push(item)
+          module_type5.value = item
           break
       }
     })

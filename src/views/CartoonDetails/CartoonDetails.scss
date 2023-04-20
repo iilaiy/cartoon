@@ -58,7 +58,7 @@
 .description {
   margin: 0 0.3rem;
   .classifications {
-    margin: 0.8rem 0;
+    margin: 0.6rem 0 0.4rem 0;
     display: flex;
     flex-wrap: wrap;
     gap: 0.2rem;
@@ -74,5 +74,35 @@
     font-size: 0.36rem;
     color: #333333;
     line-height: 0.6rem;
+  }
+  :deep(.van-text-ellipsis__action) {
+    color: #999999;
+    // position: relative;
+    // &::after {
+    //   background: linear-gradient(90deg, hsla(0, 0%, 100%, 0), #ffffff);
+    //   content: '';
+    //   height: 0.85rem;
+    //   width: 1.2rem;
+    //   left: -1.2rem;
+    //   position: absolute;
+    //   top: 0;
+    // }
+  }
+  .authors {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .author {
+      margin-right: 0.2rem;
+      img {
+        width: 0.5rem;
+        border-radius: 50%;
+        margin-right: 0.1rem;
+      }
+      span {
+        font-size: 0.3rem;
+        color: #999999;
+      }
+    }
   }
 }

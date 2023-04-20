@@ -47,7 +47,6 @@ export function getChangeCartoonInfo(params) {
  * @params 请求参数
  */
 export function getCarrtonDetails(params) {
-  console.log(params)
   return request({
     url: `/api/v2/pweb/topic/${params}`,
   })
