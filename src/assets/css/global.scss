@@ -16,10 +16,33 @@ input {
   padding: 0;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+  padding: 0;
+  margin: 0;
+}
+
 /*不倾斜*/
 em,
 i {
   font-style: normal;
+}
+
+/*button hover*/
+button {
+  cursor: pointer;
+}
+
+button,
+input {
+  font-family: 'Microsoft YaHei', 'Heiti SC';
+  outline: none;
+  border: none;
 }
 
 /*去掉列表前面的小点*/
@@ -36,6 +59,11 @@ img {
 
 i {
   display: block;
+}
+
+/*取消链接的下划线*/
+a {
+  text-decoration: none;
 }
 
 /*单行文字隐藏*/

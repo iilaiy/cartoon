@@ -61,7 +61,6 @@ const ChangeHandler = () => {
 }
 
 const toList = item => {
-  console.log(item)
   router.push({
     path: `/mobile/${item.id}/list`,
     query: {
