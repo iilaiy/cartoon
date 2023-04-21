@@ -1,0 +1,48 @@
+.content {
+  display: flex;
+  justify-content: space-between;
+  width: 96%;
+  margin: 0 auto;
+}
+.column {
+  width: 49%;
+  .box {
+    border: 1px solid #f6f6f6;
+    border-radius: 0.2rem;
+    margin: 0.2rem 0;
+    overflow: hidden;
+  }
+  .title {
+    padding-left: 0.15rem;
+    font-size: 0.36rem;
+    color: #333333;
+    margin-top: 0.3rem;
+    margin-bottom: 0.1rem;
+  }
+  .bot {
+    margin-right: 0.15rem;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.3rem;
+    span {
+      font-size: 0.3rem;
+      color: #a7a7a7;
+    }
+    .author {
+      margin-left: 0.15rem;
+      img {
+        width: 0.5rem;
+        border-radius: 50%;
+        margin-right: 0.1rem;
+      }
+    }
+    .link {
+      display: flex;
+      align-items: center;
+      img {
+        width: 0.4rem;
+        margin-right: 0.1rem;
+      }
+    }
+  }
+}
