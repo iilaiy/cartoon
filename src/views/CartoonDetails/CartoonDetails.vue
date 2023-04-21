@@ -43,7 +43,11 @@
         </div>
       </div>
     </div>
-    <MangaAnthology></MangaAnthology>
+    <MangaAnthology
+      :update_status="list.topic_info.update_status"
+      :comics="list.topic_info.comics"
+      :comic_body_count="list.topic_info.comic_body_count"
+    ></MangaAnthology>
   </div>
 </template>
 <script setup>
