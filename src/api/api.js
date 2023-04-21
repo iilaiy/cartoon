@@ -59,15 +59,16 @@ export function getCarrtonDetails(params) {
 export function getCarrtonChapterDetails(params) {
   return request({
     url: `/mapi/v2/mweb/comic/${params}`,
+    method: 'get',
   })
 }
 
 /**
- * 获取最新数据 ❌
+ * 获取世界数据
  */
-export function getLatestInfo() {
+export function getCartoonWorldInfo(limit = 20) {
   return request({
-    url: '/api/v2/pweb/ugc/topics',
+    url: `/api/v1/graph/pc/feeds/getRecommendFeed?uid=0&webTokenId=1615007958330_FFwnyURnzD0rgO2&since=0&limit=${limit}`,
     method: 'get',
   })
 }

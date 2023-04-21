@@ -33,7 +33,7 @@ const bannerList = computed(() => {
 
 <style lang="scss" scoped>
 .banner {
-  margin-top: 0.4rem;
+  margin-top: 0.3rem;
   .my-swipe {
     height: 3.3rem;
     overflow: hidden;

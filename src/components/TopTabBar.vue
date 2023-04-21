@@ -1,5 +1,11 @@
 <template>
-  <van-tabs v-model:active="active" color="#fde23d" sticky>
+  <van-tabs
+    v-model:active="active"
+    color="#fde23d"
+    sticky
+    duration="0"
+    line-width="25"
+  >
     <van-tab
       v-for="(cmp, index) in topTabBarCmpList"
       :key="index"
@@ -51,3 +57,9 @@ watch(
   }
 )
 </script>
+
+<style lang="scss" scoped>
+:deep(.van-tabs__line) {
+  bottom: 0.55rem;
+}
+</style>

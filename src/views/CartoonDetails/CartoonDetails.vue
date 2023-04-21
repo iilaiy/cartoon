@@ -7,7 +7,9 @@
       @click-left="onClickLeft"
     />
     <div class="header-banner">
-      <img :src="list.topic_info.cover_image_url" alt="" />
+      <div class="img-box">
+        <img :src="list.topic_info.cover_image_url" alt="" />
+      </div>
       <div class="mask">
         <div class="base-info">
           <div class="title">
@@ -47,12 +49,29 @@
       :update_status="list.topic_info.update_status"
       :comics="list.topic_info.comics"
       :comic_body_count="list.topic_info.comic_body_count"
+      :is_free="list.topic_info.is_free"
     ></MangaAnthology>
+    <DetailsRecommend
+      :list="list.recommend_topics"
+      :title="`看完《${list.topic_info.title}》的还会看`"
+    ></DetailsRecommend>
+    <DetailsRecommend
+      :list="list.bottom_recommend.topic_list"
+      :title="list.bottom_recommend.title"
+    ></DetailsRecommend>
+    <div class="footer">
+      <div class="title text-one-hidden">
+        {{ list.topic_info.comics[0].title }}
+      </div>
+      <div class="button">开始阅读</div>
+    </div>
   </div>
 </template>
 <script setup>
 import { getCurrentInstance, ref } from 'vue'
+import { showFailToast } from 'vant'
 import MangaAnthology from './components/MangaAnthology.vue'
+import DetailsRecommend from './components/DetailsRecommend.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { getCarrtonDetails } from '@/api/api.js'
 const route = useRoute()
@@ -65,8 +84,9 @@ const list = ref({})
 const getCarrtonDetailsHandler = async () => {
   try {
     const res = await getCarrtonDetails(route.path.split('/')[2])
-    console.log(res)
-    console.log(' ↑------------- 详情数据 ----------------↑')
+    // console.log(res)
+    // console.log(' ↑------------- 详情数据 ----------------↑')
+    if (res.code != 200) return showFailToast('发生错误，刷新一下看看')
     list.value = res.data
     global.$store.vshow = false
   } catch (e) {

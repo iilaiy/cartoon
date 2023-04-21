@@ -84,7 +84,7 @@ const toList = item => {
     height: 5rem;
     width: calc(97% / v-bind(column)) !important;
     .img-box {
-      height: 4.1rem;
+      min-height: 4rem;
     }
     .tags {
       color: #9999a5;

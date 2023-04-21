@@ -4,6 +4,9 @@
 :deep(.van-nav-bar__title) {
   font-weight: normal;
 }
+.topicDetail {
+  padding-bottom: 1rem;
+}
 .header-banner {
   position: relative;
   .mask {
@@ -104,5 +107,30 @@
         color: #999999;
       }
     }
+  }
+}
+.footer {
+  border-top: 1px solid #f9fafa;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  background-color: #ffffff;
+  .title {
+    flex: 1;
+    font-size: 0.34rem;
+    color: #999999;
+    margin-left: 0.3rem;
+  }
+  .button {
+    font-size: 0.36rem;
+    background-color: #fce23d;
+    height: 100%;
+    width: 3.5rem;
+    height: 1.2rem;
+    line-height: 1.2rem;
+    text-align: center;
   }
 }

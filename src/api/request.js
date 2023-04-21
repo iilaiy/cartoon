@@ -6,12 +6,12 @@ import { showFailToast } from 'vant'
 
 // 创建新的axios实例
 const requests = axios.create({
-  // 超时时间 单位是ms，这里设置了5s的超时时间
-  timeout: 5 * 1000,
+  // 超时时间 单位是ms，这里设置了10s的超时时间
+  timeout: 10 * 1000,
   // 设置全局重试请求次数
   retry: 3,
   // 设置全局请求间隔
-  retryDelay: 1000,
+  retryDelay: 500,
   // 允许携带cookie
   withCredentials: true,
 })

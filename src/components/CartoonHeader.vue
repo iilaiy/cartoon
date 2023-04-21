@@ -50,6 +50,9 @@ import logo from '@/assets/images/logo.png'
       border-radius: 0.5rem;
       i {
         width: 0.55rem;
+        img {
+          margin-bottom: 0.08rem;
+        }
       }
       span {
         color: #9999a5;

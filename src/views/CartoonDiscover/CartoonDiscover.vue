@@ -73,9 +73,9 @@ const getDataAll = async () => {
     // let times = new Date()
     const res = await getCartoonInfo()
     // 当所有数据请求完毕再进行数据渲染
-    console.log(res)
-    console.log(' ↑------------- 首页数据 ----------------↑')
-    discoverData.value = res.data
+    // console.log(res)
+    // console.log(' ↑------------- 首页数据 ----------------↑')
+    discoverData.value = true
     res.data.infos.map(item => {
       switch (item.module_type) {
         case 1:

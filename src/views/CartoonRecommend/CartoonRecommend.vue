@@ -1,15 +1,127 @@
 <template>
-  <CartoonHeader></CartoonHeader>
-  <TopTabBar>
-    <div>推荐</div>
-  </TopTabBar>
+  <div class="recommend" v-if="listArray.length">
+    <CartoonHeader></CartoonHeader>
+    <TopTabBar>
+      <div class="content">
+        <div class="box" v-for="item in listArray" :key="item.comic_id">
+          <div class="top">
+            <div class="title">{{ item.title.text }}</div>
+            <div class="pay-attention-to">关注</div>
+          </div>
+          <div class="tags">
+            <div
+              class="tag"
+              v-for="(val, i) in item.recommend_tag"
+              :key="i"
+              :style="{
+                color: val.text_mask,
+                backgroundColor: val.background_mask,
+              }"
+            >
+              <span>{{ val.title }}</span>
+              <img :src="val.behind_icon" alt="" />
+            </div>
+          </div>
+          <div class="img-box">
+            <img v-lazy="item.cover_image_info.images[0].url" alt="" />
+          </div>
+          <div class="bot">
+            <div class="title">
+              {{ item.sub_title }}
+            </div>
+            <div class="link">
+              <img src="@/assets/images/icon/link-icon.png" alt="" />
+              <span>{{ item.like_count }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </TopTabBar>
+  </div>
 </template>
 
 <script setup>
+import { getCurrentInstance, ref } from 'vue'
 import CartoonHeader from '@/components/CartoonHeader.vue'
 import TopTabBar from '@/components/TopTabBar.vue'
+// import { getCarrtonRecommend } from '@/api/api.js'
+import cards from '@/data/recommend.js'
+const { appContext } = getCurrentInstance()
+const global = appContext.config.globalProperties
 
-console.log('推荐模块被创建啦')
+const listArray = ref([])
+listArray.value = cards
+global.$store.vshow = false
+
+// const getCarrtonRecommendHandler = async () => {
+//   try {
+//     const res = await getCarrtonRecommend()
+//     console.log(res)
+//     listArray.value = res.data.cards
+//     global.$store.vshow = false
+//   } catch (e) {
+//     console.log(e)
+//   }
+// }
+// getCarrtonRecommendHandler()
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.content {
+  background-color: #f7f9fa;
+  .box {
+    padding: 0 3%;
+    background-color: #ffffff;
+    margin-bottom: 0.3rem;
+    .top {
+      padding-top: 0.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .title {
+        font-size: 0.4rem;
+      }
+      .pay-attention-to {
+        font-size: 0.3rem;
+        border-radius: 0.3rem;
+        border: 1px solid #e6e6e6;
+        padding: 0.1rem 0.3rem;
+      }
+    }
+    .tags {
+      margin-top: 0.2rem;
+      margin-bottom: 0.2rem;
+      font-size: 0.3rem;
+      display: flex;
+      flex-wrap: wrap;
+      .tag {
+        padding: 0.1rem 0.2rem;
+        border-radius: 0.2rem;
+        margin-right: 0.1rem;
+        img {
+          width: 0.2rem;
+        }
+      }
+    }
+    .bot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #999999;
+      padding: 0.4rem 0;
+      .title {
+        font-size: 0.4rem;
+      }
+      .link {
+        img {
+          width: 0.4rem;
+          margin-right: 0.1rem;
+        }
+        span {
+          font-size: 0.3rem;
+        }
+      }
+    }
+  }
+}
+</style>
