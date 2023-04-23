@@ -33,6 +33,24 @@ const routes = [
     name: 'Mobile',
     component: () => import('@/views/CartoonDetails/CartoonDetails.vue'),
   },
+  {
+    path: '/sou/:keyword?',
+    name: 'Search',
+    meta: {
+      title: '搜索',
+      keepAlive: true,
+    },
+    component: () => import('@/views/SearchPage/SearchPage.vue'),
+  },
+  {
+    path: '/:catchAll(.*)',
+    name: 'error',
+    meta: {
+      title: '404',
+      overlayHide: true, // 不显示加载组件
+    },
+    component: () => import('@/views/PageNotFound/PageNotFound.vue'),
+  },
 ]
 
 const router = createRouter({

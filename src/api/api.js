@@ -74,6 +74,37 @@ export function getCartoonWorldInfo(limit = 20) {
 }
 
 /**
+ * 获取热搜
+ */
+export function getHotInfo(param = { page: 1, size: 10 }) {
+  return request({
+    url: `/mapi/search/mini/hot_word?diffServerTimestamp=${Date.now()}&page=${
+      param.page
+    }&size=${param.size}`,
+  })
+}
+
+/**
+ * 获取模糊搜索结果
+ */
+export function getSuggestionInfo(param = { q: '' }) {
+  return request({
+    url: `/api/v1/search/suggestion_topic_author?q=${param.q}&type=2&f=2`,
+  })
+}
+
+/**
+ * 获取搜索结果
+ */
+export function getSearchResult(param = { q: '' }) {
+  return request({
+    url: `/mapi/search/web/complex?diffServerTimestamp=${Date.now()}&q=${
+      param.q
+    }&f=4`,
+  })
+}
+
+/**
  * 获获取分类数据 ❌
  * @param params 请求参数
  *  count 返回数量

@@ -5,6 +5,18 @@ window.onload = function () {
       event.preventDefault()
     }
   })
+  var lastTouchEnd = 0
+  document.addEventListener(
+    'touchend',
+    function (event) {
+      var now = new Date().getTime()
+      if (now - lastTouchEnd <= 300) {
+        event.preventDefault()
+      }
+      lastTouchEnd = now
+    },
+    false
+  )
   document.addEventListener('gesturestart', function (event) {
     event.preventDefault()
   })
@@ -12,7 +24,11 @@ window.onload = function () {
 </script>
 
 <template>
-  <van-overlay :show="$store.vshow" z-index="999">
+  <van-overlay
+    v-if="!$route.meta.overlayHide"
+    :show="$store.vshow"
+    z-index="999"
+  >
     <van-loading
       style="
         width: 100vw;

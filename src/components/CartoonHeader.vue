@@ -4,7 +4,7 @@
       <div class="logo">
         <img :src="logo" alt="" />
       </div>
-      <div class="search common">
+      <div class="search common" @click="toSearch">
         <i class="search-icon">
           <img src="@/assets/images/icon/search_icon.png" alt="" />
         </i>
@@ -21,7 +21,15 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
+const router = useRouter()
 import logo from '@/assets/images/logo.png'
+
+const toSearch = () => {
+  router.push({
+    path: `/sou/`,
+  })
+}
 </script>
 
 <style scoped lang="scss">

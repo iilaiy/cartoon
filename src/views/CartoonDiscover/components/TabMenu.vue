@@ -1,50 +1,55 @@
 <template>
   <div class="tab-menu" v-if="list">
-    <van-tabs
-      v-model:active="tabMenuActive"
-      line-height="0"
-      line-width="0"
-      :ellipsis="false"
-    >
-      <van-tab v-for="(item, index) in list.banner_list" :key="index">
-        <template #title>
-          <div class="menu-silder">
-            <i>
-              <img :src="item.image" alt="" />
-            </i>
-            <span>{{ item.title }}</span>
-          </div>
-        </template>
-      </van-tab>
-    </van-tabs>
+    <div class="tabs">
+      <div class="tab" v-for="item in list.banner_list" :key="item.id">
+        <img :src="item.image" alt="" />
+        <span>{{ item.title }}</span>
+        <i>
+          <img :src="item.icon" alt="" />
+        </i>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+// import { ref } from 'vue'
 defineProps({
   list: {
     type: Object,
   },
 })
-const tabMenuActive = ref(0)
 </script>
 
 <style lang="scss" scoped>
-.tab-menu {
-  height: 1.7rem;
+.tabs {
   display: flex;
-  align-items: center;
-  .menu-silder {
+  justify-content: space-around;
+  white-space: nowrap;
+  overflow-x: scroll;
+  .tab {
+    width: 4rem;
+    padding: 0.4rem;
     display: flex;
-    font-weight: normal;
     align-items: center;
-    color: #000000;
-    font-size: 0.42rem;
+    justify-content: space-around;
+    background-image: url('@/assets/images/icon/menu-bg.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     img {
       width: 0.6rem;
-      margin-right: 0.1rem;
+    }
+    span {
+      font-size: 0.4rem;
+    }
+    i {
+      img {
+        width: 0.4rem;
+      }
     }
   }
+}
+.tabs::-webkit-scrollbar {
+  display: none;
 }
 </style>

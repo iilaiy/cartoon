@@ -5,7 +5,7 @@
       <div class="content">
         <div class="box" v-for="item in listArray" :key="item.comic_id">
           <div class="top">
-            <div class="title">{{ item.title.text }}</div>
+            <div class="title" @click="toList(item)">{{ item.title.text }}</div>
             <div class="pay-attention-to">关注</div>
           </div>
           <div class="tags">
@@ -46,6 +46,8 @@ import CartoonHeader from '@/components/CartoonHeader.vue'
 import TopTabBar from '@/components/TopTabBar.vue'
 // import { getCarrtonRecommend } from '@/api/api.js'
 import cards from '@/data/recommend.js'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const { appContext } = getCurrentInstance()
 const global = appContext.config.globalProperties
 
@@ -64,6 +66,12 @@ global.$store.vshow = false
 //   }
 // }
 // getCarrtonRecommendHandler()
+
+const toList = item => {
+  router.push({
+    path: `/mobile/${item.topic_id}/list`,
+  })
+}
 </script>
 
 <style scoped lang="scss">
@@ -79,6 +87,7 @@ global.$store.vshow = false
       justify-content: space-between;
       align-items: center;
       .title {
+        flex: 1;
         font-size: 0.4rem;
       }
       .pay-attention-to {

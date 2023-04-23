@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import postCssPxToRem from 'postcss-pxtorem'
 import * as path from 'path'
+import { visualizer } from 'rollup-plugin-visualizer'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,7 +12,13 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'),
     },
   },
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    //打包体积分析
+    visualizer({
+      open: true, //注意这里要设置为true，否则无效
+    }),
+  ],
   base: '/',
   css: {
     postcss: {
