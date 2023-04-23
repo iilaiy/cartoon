@@ -14,7 +14,7 @@ export default defineConfig({
   },
   plugins: [
     vue(),
-    //打包体积分析
+    // 打包体积分析
     visualizer({
       open: true, //注意这里要设置为true，否则无效
     }),
