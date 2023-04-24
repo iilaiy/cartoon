@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="card" v-if="list.show_more">
-      <div class="box">查看更多</div>
+      <div class="box" @click="toMobList">查看更多</div>
       <div class="box" @click="ChangeHandler">换一换</div>
     </div>
   </div>
@@ -69,6 +69,10 @@ const toList = item => {
       module_id: props.list.module_id,
     },
   })
+}
+
+const toMobList = () => {
+  console.log(props.list)
 }
 </script>
 

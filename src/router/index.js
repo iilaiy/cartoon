@@ -29,6 +29,14 @@ const routes = [
     component: () => import('@/views/CartoonWorld/CartoonWorld.vue'),
   },
   {
+    path: '/mob/list',
+    name: 'MobList',
+    meta: {
+      keepAlive: true,
+    },
+    component: () => import('@/views/MobList/mobList.vue'),
+  },
+  {
     path: '/mobile/:id/:page',
     name: 'Mobile',
     component: () => import('@/views/CartoonDetails/CartoonDetails.vue'),
