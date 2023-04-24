@@ -72,7 +72,16 @@ const toList = item => {
 }
 
 const toMobList = () => {
-  console.log(props.list)
+  // console.log(props.list)
+  router.push({
+    name: 'MoreView',
+    query: {
+      card_type: props.list.card_type,
+      module_id: props.list.module_id,
+      module_type: props.list.module_type,
+      module_title: props.list.title,
+    },
+  })
 }
 </script>
 

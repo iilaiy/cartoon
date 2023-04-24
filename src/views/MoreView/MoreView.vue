@@ -1,11 +1,11 @@
 <template>
   <div class="mob-list">
     <van-nav-bar
-      title="标题"
-      left-text="返回"
+      :title="route.query.module_title"
       left-arrow
       @click-left="onClickLeft"
     />
+    <div class="content"></div>
   </div>
 </template>
 
@@ -17,11 +17,10 @@ const global = appContext.config.globalProperties
 const route = useRoute()
 const router = useRouter()
 
-defineProps({
-  list: {
-    type: Object,
-  },
-})
+const getMoreInfoHandler = async () => {
+  global.$store.vshow = false
+}
+getMoreInfoHandler()
 
 onMounted(() => {
   console.log(route.query)
@@ -32,4 +31,6 @@ const onClickLeft = () => {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@import './MoreView.scss';
+</style>
