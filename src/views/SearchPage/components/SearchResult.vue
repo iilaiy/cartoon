@@ -11,6 +11,7 @@
           class="box"
           v-for="item in selectSearchResultHandler"
           :key="item.id"
+          @click.stop="toList(item)"
         >
           <div class="left">
             <div class="img-box">
@@ -20,7 +21,7 @@
           <div class="right">
             <div class="b-title">
               <span>{{ item.title }}</span>
-              <button>+ 关注</button>
+              <button @click.stop="payAttentionTo">+ 关注</button>
             </div>
             <p>{{ item.user.nickname }}</p>
             <div class="tags">
@@ -46,7 +47,7 @@
       <span>查看更多搜索结果</span>
       <img src="@/assets/images/icon/min-arrow-right.png" alt="" />
     </div>
-    <div class="bot">
+    <div class="bot" v-if="searchResult.posts.hit.length != 0">
       <div class="title">
         “
         <span>{{ searchValue }}</span>
@@ -79,6 +80,8 @@
 
 <script setup>
 import { onMounted, computed } from 'vue'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
 const props = defineProps({
   searchResult: {
@@ -102,6 +105,16 @@ const selectSearchResultHandler = computed(() => {
 onMounted(() => {
   //   console.log(props.searchResult)
 })
+
+const toList = item => {
+  router.push({
+    path: `/mobile/${item.id}/list`,
+  })
+}
+
+const payAttentionTo = () => {
+  console.log('关注')
+}
 </script>
 
 <style lang="scss" scoped>

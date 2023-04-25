@@ -43,7 +43,6 @@ const routes = [
     name: 'Search',
     meta: {
       title: '搜索',
-      keepAlive: true,
     },
     component: () => import('@/views/SearchPage/SearchPage.vue'),
   },

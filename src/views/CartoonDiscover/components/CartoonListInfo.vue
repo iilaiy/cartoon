@@ -10,8 +10,8 @@
     >
       <template #nav-right>
         <div class="more">
-          <span>更多</span
-          ><i><img src="@/assets/images/icon/arrow-right.png" alt="" /></i>
+          <span>更多</span>
+          <i><img src="@/assets/images/icon/arrow-right.png" alt="" /></i>
         </div>
       </template>
       <van-tab
@@ -19,8 +19,7 @@
         :key="index"
         :title="item.title"
         :title-style="titleStyle"
-      >
-      </van-tab>
+      ></van-tab>
     </van-tabs>
     <div class="main">
       <img
@@ -34,6 +33,7 @@
           class="cbox"
           v-for="(item, index) in listInfo.banner_list[active].banner_children"
           :key="item.id"
+          @click.stop="toList(item)"
         >
           <div class="img-box">
             <img v-lazy="item.image" />
@@ -61,7 +61,10 @@
 
 <script setup>
 import { ref } from 'vue'
-defineProps({
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
+const props = defineProps({
   listInfo: {
     type: Object,
   },
@@ -70,6 +73,16 @@ const active = ref(0)
 const titleStyle = {
   fontSize: '.38rem',
   color: '#000000',
+}
+
+const toList = item => {
+  router.push({
+    path: `/mobile/${item.id}/list`,
+    query: {
+      module_title: props.listInfo.banner_list[active.value].title,
+      module_id: props.listInfo.banner_list[active.value].id,
+    },
+  })
 }
 </script>
 

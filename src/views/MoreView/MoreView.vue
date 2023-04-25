@@ -6,7 +6,12 @@
       @click-left="onClickLeft"
     />
     <div class="content">
-      <div class="item" v-for="item in moreList" :key="item.id">
+      <div
+        class="item"
+        v-for="item in moreList"
+        :key="item.id"
+        @click.stop="toList(item)"
+      >
         <div class="img-box">
           <img v-lazy="item.cover_image_url" alt="" />
         </div>
@@ -15,7 +20,7 @@
             <div class="title text-one-hidden">
               {{ item.title }}
             </div>
-            <div class="button">+ 关注</div>
+            <div class="button" @click.stop="payAttentionTo">+ 关注</div>
           </div>
           <div class="tags">
             <span v-for="(val, i) in item.category" :key="i">
@@ -25,19 +30,23 @@
           <div class="b-bot">
             <div class="favourite">
               <img src="@/assets/images/icon/link.png" alt="" />
-              <span>{{
-                item.like_count > 100000
-                  ? (item.like_count / 100000).toFixed(2) + '万'
-                  : item.like_count
-              }}</span>
+              <span>
+                {{
+                  item.like_count > 100000
+                    ? (item.like_count / 100000).toFixed(2) + '万'
+                    : item.like_count
+                }}
+              </span>
             </div>
             <div class="comment">
               <img src="@/assets/images/icon/comment.png" alt="" />
-              <span>{{
-                item.comment_count > 100000
-                  ? (item.comment_count / 100000).toFixed(2) + '万'
-                  : item.comment_count
-              }}</span>
+              <span>
+                {{
+                  item.comment_count > 100000
+                    ? (item.comment_count / 100000).toFixed(2) + '万'
+                    : item.comment_count
+                }}
+              </span>
             </div>
           </div>
         </div>
@@ -48,8 +57,16 @@
       :size="loading.size"
       text-size="14px"
       class="loading"
-      >{{ loading.text }}</van-loading
     >
+      {{ loading.text }}
+    </van-loading>
+    <van-back-top
+      style="
+        background-color: #ffffff;
+        box-shadow: 1px 1px 5px #e0e0e0;
+        color: #5e6267;
+      "
+    />
   </div>
 </template>
 
@@ -130,6 +147,21 @@ onBeforeUnmount(() => {
 
 const onClickLeft = () => {
   router.back()
+}
+
+const toList = item => {
+  router.push({
+    path: `/mobile/${item.id}/list`,
+    query: {
+      module_type: route.query.module_type,
+      module_title: route.query.title,
+      module_id: route.query.module_id,
+    },
+  })
+}
+
+const payAttentionTo = () => {
+  console.log('关注')
 }
 </script>
 

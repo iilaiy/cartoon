@@ -18,7 +18,7 @@
           <div class="info">
             <span>{{ list.topic_info.popularity_info }}人气值</span>
             <span>{{ list.topic_info.comments_count }}总评论</span>
-            <span>{{ list.topic_info.likes_count }}关注</span>
+            <span>{{ list.topic_info.fav_count }}关注</span>
           </div>
         </div>
         <div class="follow-button">关注</div>
@@ -38,9 +38,13 @@
       />
       <div class="hidden-scrollbar-box">
         <div class="authors hidden-scrollbar">
-          <div class="author">
-            <img v-lazy="list.topic_info.user.avatar" alt="" />
-            <span>{{ list.topic_info.user.nickname }}</span>
+          <div
+            class="author"
+            v-for="val in list.topic_info.user_list"
+            :key="val.user_id"
+          >
+            <img v-lazy="val.avatar" alt="" />
+            <span>{{ val.nickname }}</span>
           </div>
         </div>
       </div>
@@ -52,13 +56,15 @@
       :is_free="list.topic_info.is_free"
     ></MangaAnthology>
     <DetailsRecommend
+      v-if="list.recommend_topics.length"
       :list="list.recommend_topics"
       :title="`看完《${list.topic_info.title}》的还会看`"
     ></DetailsRecommend>
-    <DetailsRecommend
+    <!-- <DetailsRecommend
+      v-if="list.bottom_recommend.topic_list.length"
       :list="list.bottom_recommend.topic_list"
       :title="list.bottom_recommend.title"
-    ></DetailsRecommend>
+    ></DetailsRecommend> -->
     <div class="footer">
       <div class="title text-one-hidden">
         {{ list.topic_info.comics[0].title }}
@@ -69,7 +75,6 @@
 </template>
 <script setup>
 import { getCurrentInstance, ref } from 'vue'
-import { showFailToast } from 'vant'
 import MangaAnthology from './components/MangaAnthology.vue'
 import DetailsRecommend from './components/DetailsRecommend.vue'
 import { useRoute, useRouter } from 'vue-router'
@@ -84,9 +89,6 @@ const list = ref({})
 const getCarrtonDetailsHandler = async () => {
   try {
     const res = await getCarrtonDetails(route.path.split('/')[2])
-    // console.log(res)
-    // console.log(' ↑------------- 详情数据 ----------------↑')
-    if (res.code != 200) return showFailToast('发生错误，刷新一下看看')
     list.value = res.data
     global.$store.vshow = false
   } catch (e) {

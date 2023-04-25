@@ -59,6 +59,9 @@ watch(
 </script>
 
 <style lang="scss" scoped>
+:deep(.van-tab) {
+  overflow: auto;
+}
 :deep(.van-tabs__line) {
   bottom: 0.55rem;
 }

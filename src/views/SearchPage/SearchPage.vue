@@ -133,9 +133,8 @@ const updataInputValHandler = async () => {
   searchResult.value = {}
   if (searchValue.value == '') return (suggestionList.value = [])
   try {
-    const res = await getSuggestionInfo({ q: searchValue.value })
-    // console.log(res)
-    suggestionList.value = res.data.info
+    const res = await getSuggestionInfo({ q: searchValue.value, size: 20 })
+    suggestionList.value = res.hits
   } catch (e) {
     console.log(e)
   }

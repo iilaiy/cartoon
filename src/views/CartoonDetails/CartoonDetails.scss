@@ -80,21 +80,11 @@
   }
   :deep(.van-text-ellipsis__action) {
     color: #999999;
-    // position: relative;
-    // &::after {
-    //   background: linear-gradient(90deg, hsla(0, 0%, 100%, 0), #ffffff);
-    //   content: '';
-    //   height: 0.85rem;
-    //   width: 1.2rem;
-    //   left: -1.2rem;
-    //   position: absolute;
-    //   top: 0;
-    // }
   }
   .authors {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    align-items: center;
     .author {
       margin-right: 0.2rem;
       img {

@@ -23,10 +23,6 @@
         </div>
         <span class="text-one-hidden">{{ item.title }}</span>
       </div>
-      <div class="clickMore">
-        <img src="@/assets/images/icon/q-right.png" alt="" />
-        <span>查看更多</span>
-      </div>
     </div>
   </div>
 </template>
@@ -136,20 +132,8 @@ const selectComics = computed(() => {
       margin-top: 0.2rem;
     }
   }
-  .clickMore {
-    border-radius: 0.2rem;
-    background-color: #f2f2f2;
-    font-size: 0.3rem;
-    color: #a3a3a3;
-    height: 2.35rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 0 0.25rem;
-    img {
-      width: 0.3rem;
-    }
+  .box:last-child {
+    margin-right: 0;
   }
 }
 .list::-webkit-scrollbar {

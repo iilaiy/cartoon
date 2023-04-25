@@ -17,19 +17,6 @@ export function getCartoonInfo() {
 }
 
 /**
- * 获取每日更新 ❌
- * @param params 请求参数
- * pos 星期几 0~6
- */
-export function getUpdatedDailyInfo(params) {
-  const data = params || 0
-  return request({
-    url: '/api/v2/pweb/daily/topics?pos=' + data,
-    method: 'get',
-  })
-}
-
-/**
  * 获取更多漫画
  * @param params 请求参数
  */
@@ -67,7 +54,7 @@ export function getChangeCartoonInfo(params) {
  */
 export function getCarrtonDetails(params) {
   return request({
-    url: `/api/v2/pweb/topic/${params}`,
+    url: `/mapi/v2/mweb/topic/${params}`,
   })
 }
 
@@ -83,7 +70,7 @@ export function getCarrtonChapterDetails(params) {
 }
 
 /**
- * 获取世界数据
+ * 获取世界数据(pc)
  */
 export function getCartoonWorldInfo(limit = 20) {
   return request({
@@ -106,9 +93,11 @@ export function getHotInfo(param = { page: 1, size: 10 }) {
 /**
  * 获取模糊搜索结果
  */
-export function getSuggestionInfo(param = { q: '' }) {
+export function getSuggestionInfo(params) {
   return request({
-    url: `/api/v1/search/suggestion_topic_author?q=${param.q}&type=2&f=2`,
+    url: `/mapi/search/mini/suggest?q=${params.q}&size=${
+      params.size
+    }&diffServerTimestamp=${Date.now()}`,
   })
 }
 
@@ -169,6 +158,19 @@ export function getListInfo() {
 export function getOriginalInfo() {
   return request({
     url: '/api/v2/pweb/ugc/rec_topics',
+    method: 'get',
+  })
+}
+
+/**
+ * 获取每日更新 ❌
+ * @param params 请求参数
+ * pos 星期几 0~6
+ */
+export function getUpdatedDailyInfo(params) {
+  const data = params || 0
+  return request({
+    url: '/api/v2/pweb/daily/topics?pos=' + data,
     method: 'get',
   })
 }
