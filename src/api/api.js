@@ -30,6 +30,25 @@ export function getUpdatedDailyInfo(params) {
 }
 
 /**
+ * 获取更多漫画
+ * @param params 请求参数
+ */
+export function getMoreCartoonInfo(params) {
+  return request({
+    url: '/mapi/mini/v1/comic/mkuaikan/discovery/module_more',
+    params: {
+      diffServerTimestamp: Date.now(),
+      since: params.since,
+      limit: params.limit,
+      gender: 0,
+      card_type: params.card_type,
+      module_id: Number(params.module_id),
+    },
+    method: 'get',
+  })
+}
+
+/**
  * 换一换模块
  * @returns
  */

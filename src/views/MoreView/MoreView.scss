@@ -3,3 +3,58 @@
   color: #000000;
   font-size: 0.5rem;
 }
+
+.content {
+  .item {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #f3f3f3;
+    padding-right: 0.4rem;
+    .img-box {
+      width: 4rem;
+    }
+    .right {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      width: calc(100% - 4.3rem);
+      .top {
+        display: flex;
+        .title {
+          flex: 1;
+          font-size: 0.42rem;
+        }
+        .button {
+          margin-left: 0.1rem;
+          background-color: #fde23d;
+          border-radius: 0.4rem;
+          padding: 0.1rem 0.2rem;
+          font-size: 0.32rem;
+        }
+      }
+    }
+    .tags {
+      font-size: 0.35rem;
+      span {
+        margin-right: 0.1rem;
+        color: #989ba0;
+      }
+    }
+
+    .b-bot {
+      color: #999999;
+      display: flex;
+      font-size: 0.3rem;
+      .favourite,
+      .comment {
+        display: flex;
+        align-items: center;
+        margin-right: 0.3rem;
+      }
+      img {
+        width: 0.4rem;
+        margin-right: 0.1rem;
+      }
+    }
+  }
+}

@@ -23,10 +23,17 @@
     margin-right: 0.15rem;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 0.3rem;
+    margin-top: 0.3rem;
     span {
       font-size: 0.3rem;
       color: #a7a7a7;
+    }
+    .author,
+    .link {
+      display: flex;
+      align-items: center;
     }
     .author {
       margin-left: 0.15rem;
@@ -37,8 +44,6 @@
       }
     }
     .link {
-      display: flex;
-      align-items: center;
       img {
         width: 0.4rem;
         margin-right: 0.1rem;
