@@ -31,9 +31,6 @@ const routes = [
   {
     path: '/more/list',
     name: 'MoreView',
-    meta: {
-      keepAlive: true,
-    },
     component: () => import('@/views/MoreView/MoreView.vue'),
   },
   {

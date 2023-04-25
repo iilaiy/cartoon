@@ -12,6 +12,7 @@
     padding-right: 0.4rem;
     .img-box {
       width: 4rem;
+      height: 2.5rem;
     }
     .right {
       display: flex;
@@ -57,4 +58,9 @@
       }
     }
   }
+}
+.loading {
+  height: 1rem;
+  line-height: 1rem;
+  text-align: center;
 }

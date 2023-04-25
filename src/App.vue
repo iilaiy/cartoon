@@ -1,4 +1,5 @@
 <script setup>
+import VanOverlay from '@/components/VanOverlay.vue'
 window.onload = function () {
   document.addEventListener('touchstart', function (event) {
     if (event.touches.length > 1) {
@@ -24,27 +25,9 @@ window.onload = function () {
 </script>
 
 <template>
-  <van-overlay
-    v-if="!$route.meta.overlayHide"
-    :show="$store.vshow"
-    z-index="999"
-  >
-    <van-loading
-      style="
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #ffffff;
-      "
-      size="30px"
-      vertical
-      color="#000000"
-    >
-      加载中...
-    </van-loading>
-  </van-overlay>
+  <template v-if="!$route.meta.overlayHide">
+    <VanOverlay></VanOverlay>
+  </template>
   <router-view v-slot="{ Component }">
     <keep-alive>
       <component
