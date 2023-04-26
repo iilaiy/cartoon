@@ -63,7 +63,7 @@ const selectComics = computed(() => {
 })
 
 const toCartoonChapterHandler = item => {
-  console.log(item)
+  // console.log(item)
   router.push({
     path: `/comics/${item.id}`,
   })

@@ -4,4 +4,69 @@
 }
 :deep(.van-nav-bar__title) {
   font-weight: normal;
+  max-width: 50%;
+}
+
+.nav-bar-left {
+  width: 1.6rem;
+  justify-content: space-between;
+  display: flex;
+}
+
+.back i,
+.tohome i {
+  display: block;
+  width: 0.6rem;
+  height: 0.6rem;
+  background-size: cover;
+}
+
+.back i {
+  background-image: url('@/assets/images/icon/back-icon.png');
+  &:after {
+    margin-left: 0.6rem;
+    content: '|';
+    color: #e6e6e6;
+  }
+}
+.tohome i {
+  background-image: url('@/assets/images/icon/home_icon.f27b196.png');
+}
+
+.content {
+  img {
+    float: left;
+  }
+}
+.chapterButton {
+  color: #fff;
+  position: fixed;
+  bottom: 0.2rem;
+  right: 0.3rem;
+  font-size: 0.35rem;
+  display: flex;
+  .btn {
+    margin-left: 0.3rem;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 0.4rem;
+    height: 0.68rem;
+    width: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    i {
+      display: block;
+      width: 0.25rem;
+      height: 0.25rem;
+      background-size: cover;
+      background-position: center;
+      margin-right: 0.1rem;
+    }
+  }
+  .btn:first-child i {
+    background-image: url('@/assets/images/icon/prev.png');
+  }
+  .btn:last-child i {
+    background-image: url('@/assets/images/icon/next.png');
+  }
 }

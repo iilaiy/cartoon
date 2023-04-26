@@ -58,6 +58,7 @@ const routes = [
     name: 'Comics',
     meta: {
       title: '章节详情',
+      keepAlive: true,
     },
     component: () => import('@/views/CartoonComics/CartoonComics.vue'),
   },

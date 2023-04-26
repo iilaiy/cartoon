@@ -69,7 +69,7 @@
       <div class="title text-one-hidden">
         {{ list.topic_info.comics[0].title }}
       </div>
-      <div class="button">开始阅读</div>
+      <div class="button" @click="toComics">开始阅读</div>
     </div>
   </div>
 </template>
@@ -90,7 +90,7 @@ const getCarrtonDetailsHandler = async () => {
   try {
     const res = await getCarrtonDetails(route.path.split('/')[2])
     list.value = res.data
-    // console.log(res.data);
+    console.log(res.data)
     global.$store.vshow = false
   } catch (e) {
     console.log(e)
@@ -100,6 +100,12 @@ getCarrtonDetailsHandler()
 
 const onClickLeft = () => {
   router.back()
+}
+
+const toComics = () => {
+  router.push({
+    path: `/comics/${list.value.topic_info.comics[0].id}`,
+  })
 }
 </script>
 <style lang="scss" scoped>
