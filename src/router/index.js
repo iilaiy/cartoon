@@ -29,14 +29,37 @@ const routes = [
     component: () => import('@/views/CartoonWorld/CartoonWorld.vue'),
   },
   {
+    path: '/booklist',
+    name: 'BookList',
+    meta: {
+      title: '书架',
+      keepAlive: true,
+    },
+    component: () => import('@/views/BookList/BookList.vue'),
+  },
+  {
     path: '/more/list',
     name: 'MoreView',
+    meta: {
+      title: '更多漫画',
+    },
     component: () => import('@/views/MoreView/MoreView.vue'),
   },
   {
     path: '/mobile/:id/:page',
     name: 'Mobile',
+    meta: {
+      title: '漫画详情',
+    },
     component: () => import('@/views/CartoonDetails/CartoonDetails.vue'),
+  },
+  {
+    path: '/comics/:id',
+    name: 'Comics',
+    meta: {
+      title: '章节详情',
+    },
+    component: () => import('@/views/CartoonComics/CartoonComics.vue'),
   },
   {
     path: '/sou/:keyword?',

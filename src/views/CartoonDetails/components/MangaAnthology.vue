@@ -16,7 +16,12 @@
       </div>
     </div>
     <div class="list">
-      <div class="box" v-for="item in selectComics" :key="item.id">
+      <div
+        class="box"
+        v-for="item in selectComics"
+        :key="item.id"
+        @click="toCartoonChapterHandler(item)"
+      >
         <div class="image-box">
           <img v-lazy="item.cover_image_url" alt="" />
           <div v-if="item.locked" class="lock-mask"></div>
@@ -29,6 +34,9 @@
 
 <script setup>
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
 const props = defineProps({
   comic_body_count: {
     type: Number,
@@ -53,6 +61,13 @@ const selectComics = computed(() => {
   })
   return arr
 })
+
+const toCartoonChapterHandler = item => {
+  console.log(item)
+  router.push({
+    path: `/comics/${item.id}`,
+  })
+}
 </script>
 
 <style lang="scss" scoped>

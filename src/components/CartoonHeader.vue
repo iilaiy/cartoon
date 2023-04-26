@@ -10,12 +10,14 @@
         </i>
         <span>搜索作品名</span>
       </div>
-      <div class="bookshelf common">
-        <i class="search-icon">
-          <img src="@/assets/images/icon/booklist_icon.png" alt="" />
-        </i>
-        <span>书架</span>
-      </div>
+      <router-link to="/booklist">
+        <div class="bookshelf common">
+          <i class="search-icon">
+            <img src="@/assets/images/icon/booklist_icon.png" alt="" />
+          </i>
+          <span>书架</span>
+        </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -66,11 +68,15 @@ const toSearch = () => {
         color: #9999a5;
       }
     }
+    a {
+      color: #000000;
+    }
     .bookshelf {
       i {
         float: left;
         width: 0.6rem;
         margin-right: 0.1rem;
+        margin-bottom: 0.1rem;
       }
       span {
         font-size: 0.35rem;

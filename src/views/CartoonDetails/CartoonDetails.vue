@@ -90,12 +90,14 @@ const getCarrtonDetailsHandler = async () => {
   try {
     const res = await getCarrtonDetails(route.path.split('/')[2])
     list.value = res.data
+    // console.log(res.data);
     global.$store.vshow = false
   } catch (e) {
     console.log(e)
   }
 }
 getCarrtonDetailsHandler()
+
 const onClickLeft = () => {
   router.back()
 }
