@@ -6,46 +6,13 @@
         <span>{{ searchValue }}</span>
         ”的搜索结果({{ searchResult.topics.hit.length }})
       </div>
-      <div class="content">
-        <div
-          class="box"
-          v-for="item in selectSearchResultHandler"
-          :key="item.id"
-          @click.stop="toList(item)"
-        >
-          <div class="left">
-            <div class="img-box">
-              <img v-lazy="item.vertical_image_url" alt="" />
-            </div>
-          </div>
-          <div class="right">
-            <div class="b-title">
-              <span>{{ item.title }}</span>
-              <button @click.stop="payAttentionTo">+ 关注</button>
-            </div>
-            <p>{{ item.user.nickname }}</p>
-            <div class="tags">
-              <span v-for="(val, i) in item.category" :key="i">
-                {{ val }}
-              </span>
-            </div>
-            <div class="b-bot">
-              <div class="comment">
-                <img src="@/assets/images/icon/comment.png" alt="" />
-                <span>{{ (item.comment_count / 10000).toFixed(2) }}万</span>
-              </div>
-              <div class="favourite">
-                <img src="@/assets/images/icon/link.png" alt="" />
-                <span>{{ (item.favourite_count / 10000).toFixed(2) }}万</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <ResultBox :resultList="selectSearchResultHandler"></ResultBox>
     </div>
     <div class="more" v-if="searchResult.topics.hit.length - 2 > 0">
-      <span>查看更多搜索结果</span>
-      <img src="@/assets/images/icon/min-arrow-right.png" alt="" />
+      <div class="more-btn" @click="toResultView">
+        <span>查看更多搜索结果</span>
+        <img src="@/assets/images/icon/min-arrow-right.png" alt="" />
+      </div>
     </div>
     <div class="bot" v-if="searchResult.posts.hit.length != 0">
       <div class="title">
@@ -79,8 +46,9 @@
 </template>
 
 <script setup>
-import { onMounted, computed } from 'vue'
+import { computed } from 'vue'
 import { useRouter } from 'vue-router'
+import ResultBox from './ResultBox.vue'
 const router = useRouter()
 
 const props = defineProps({
@@ -102,18 +70,10 @@ const selectSearchResultHandler = computed(() => {
   return arr
 })
 
-onMounted(() => {
-  //   console.log(props.searchResult)
-})
-
-const toList = item => {
+const toResultView = () => {
   router.push({
-    path: `/mobile/${item.id}/list`,
+    path: `/sou/result/${props.searchValue}`,
   })
-}
-
-const payAttentionTo = () => {
-  console.log('关注')
 }
 </script>
 
@@ -131,77 +91,19 @@ const payAttentionTo = () => {
     }
   }
 }
-.content {
-  .box {
-    margin-top: 0.3rem;
-    display: flex;
-    .left {
-      .img-box {
-        width: 2.5rem;
-        img {
-          border-radius: 0.1rem;
-        }
-      }
-    }
-    .right {
-      width: calc(100% - 2.8rem);
-      margin-left: 0.3rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      .b-title {
-        font-size: 0.4rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      button {
-        background-color: #ffe120;
-        border-radius: 0.4rem;
-        padding: 0.1rem 0.2rem;
-        font-size: 0.3rem;
-      }
-      p,
-      .tags,
-      .b-bot {
-        font-size: 0.34rem;
-        color: #999999;
-      }
-      p {
-        line-height: 0.5rem;
-      }
-      .tags {
-        span {
-          margin-right: 0.1rem;
-        }
-      }
-      .b-bot {
-        margin-top: 0.5rem;
-        display: flex;
-        div {
-          display: flex;
-          align-items: center;
-          margin-right: 0.3rem;
-        }
-        img {
-          width: 0.5rem;
-          margin-right: 0.1rem;
-        }
-        span {
-          font-size: 0.38rem;
-        }
-      }
-    }
-  }
-}
+
 .more {
+  padding-bottom: 0.3rem;
   margin-top: 1rem;
+  border-bottom: 1px solid #eaeaea;
+}
+.more-btn {
+  width: 40%;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #999999;
-  border-bottom: 1px solid #eaeaea;
-  padding-bottom: 0.3rem;
   span {
     font-size: 0.38rem;
   }

@@ -18,12 +18,13 @@
       </template>
     </van-nav-bar>
     <div class="content">
-      <template
+      <img
         v-for="item in comicsList.comic_info.comic_images"
+        :style="{ width: item.width }"
+        v-lazy="item.url"
+        alt=""
         :key="item.key"
-      >
-        <img :style="{ width: item.width }" v-lazy="item.url" alt="" />
-      </template>
+      />
     </div>
     <div class="chapterButton btns">
       <div class="btn prev" @click="tpChapterButton(-1)">

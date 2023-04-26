@@ -12,7 +12,7 @@
           class="box text-one-hidden"
           v-for="item in hotList.hits.hot_word"
           :key="item.target_id"
-          @click="toSearchResultHandler(item.target_title)"
+          @click="toDetailsHandler(item)"
         >
           <span>{{ item.target_title }}</span>
         </div>
@@ -53,6 +53,9 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const emit = defineEmits([
   'delHistoryHandler',
@@ -85,6 +88,12 @@ const refreshHandler = () => {
 
 const delHistory = index => {
   emit('delHistoryHandler', index)
+}
+
+const toDetailsHandler = item => {
+  router.push({
+    path: `/mobile/${item.target_id}/list`,
+  })
 }
 
 const toSearchResultHandler = item => {

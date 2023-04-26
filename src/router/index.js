@@ -63,12 +63,25 @@ const routes = [
     component: () => import('@/views/CartoonComics/CartoonComics.vue'),
   },
   {
-    path: '/sou/:keyword?',
-    name: 'Search',
+    path: '/sou',
+    name: 'Sou',
     meta: {
       title: '搜索',
+      keepAlive: true,
     },
-    component: () => import('@/views/SearchPage/SearchPage.vue'),
+    component: () => import('@/views/SearchPage/SearchView.vue'),
+    children: [
+      {
+        path: ':keyword?',
+        name: 'Search',
+        component: () => import('@/views/SearchPage/SearchPage.vue'),
+      },
+      {
+        path: 'result/:keywords?',
+        name: 'ResultMore',
+        component: () => import('@/views/SearchPage/SearchMore.vue'),
+      },
+    ],
   },
   {
     path: '/:catchAll(.*)',

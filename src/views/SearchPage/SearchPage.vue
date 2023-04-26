@@ -142,7 +142,6 @@ const updataInputValHandler = async () => {
 
 // 根据子组件（热门、历史）传递的搜索内容进行搜索
 const toSearchResultHandler = item => {
-  // console.log(item)
   searchValue.value = item
   onSearch()
 }
@@ -151,7 +150,6 @@ const toSearchResultHandler = item => {
 watch(
   () => route.params.keyword,
   val => {
-    // console.log(val)
     searchValue.value = val
     if (searchValue.value == '' || val == undefined) {
       searchResult.value = {}

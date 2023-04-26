@@ -17,8 +17,6 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
-
 const emit = defineEmits(['clickToSearchResultHandler'])
 
 defineProps({
@@ -29,12 +27,8 @@ defineProps({
     type: String,
   },
 })
-onMounted(() => {
-  // console.log(props.suggestionList)
-})
 
 const toSearchResultHandler = item => {
-  // console.log(item)
   emit('clickToSearchResultHandler', item)
 }
 </script>
