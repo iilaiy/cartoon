@@ -14,6 +14,8 @@ import 'vant/lib/index.css'
 
 const app = createApp(App)
 
+document.title = import.meta.env.VITE_APP_TITLE
+
 app.use(router)
 app.use(createPinia())
 app.use(Vant)
