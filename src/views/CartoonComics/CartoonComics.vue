@@ -58,14 +58,13 @@ const comicsList = ref({})
 const getCarrtonChapterDetailsHandler = async () => {
   try {
     const res = await getCarrtonChapterDetails(route.params.id)
-    console.log(res)
+    // console.log(res)
     comicsList.value = res.data
     global.$store.vshow = false
   } catch (e) {
     console.log(e)
   }
 }
-getCarrtonChapterDetailsHandler()
 
 const tpChapterButton = type => {
   switch (type) {
@@ -98,6 +97,9 @@ watch(
     if (route.path.split('/')[1] == 'comics') {
       getCarrtonChapterDetailsHandler()
     }
+  },
+  {
+    immediate: true,
   }
 )
 

@@ -74,7 +74,7 @@
   </div>
 </template>
 <script setup>
-import { getCurrentInstance, ref } from 'vue'
+import { getCurrentInstance, ref, watch } from 'vue'
 import MangaAnthology from './components/MangaAnthology.vue'
 import DetailsRecommend from './components/DetailsRecommend.vue'
 import { useRoute, useRouter } from 'vue-router'
@@ -96,7 +96,6 @@ const getCarrtonDetailsHandler = async () => {
     console.log(e)
   }
 }
-getCarrtonDetailsHandler()
 
 const onClickLeft = () => {
   router.back()
@@ -107,6 +106,18 @@ const toComics = () => {
     path: `/comics/${list.value.topic_info.comics[0].id}`,
   })
 }
+
+watch(
+  () => route.params.id,
+  val => {
+    if (route.path.split('/')[1] == 'mobile' && val != undefined) {
+      getCarrtonDetailsHandler()
+    }
+  },
+  {
+    immediate: true,
+  }
+)
 </script>
 <style lang="scss" scoped>
 @import './CartoonDetails.scss';

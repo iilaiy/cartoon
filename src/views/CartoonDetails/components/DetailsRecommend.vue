@@ -8,7 +8,12 @@
       </div>
     </div>
     <div class="content">
-      <div class="cbox" v-for="item in list" :key="item.id">
+      <div
+        class="cbox"
+        v-for="item in list"
+        :key="item.id"
+        @click="toList(item)"
+      >
         <div class="img-box">
           <img v-lazy="item.vertical_image_url" />
           <div v-if="item.update_time" class="concern text-one-hidden">
@@ -32,6 +37,9 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
 defineProps({
   list: {
     type: Object,
@@ -40,6 +48,12 @@ defineProps({
     type: String,
   },
 })
+
+const toList = item => {
+  router.push({
+    path: `/mobile/${item.id}/list`,
+  })
+}
 </script>
 
 <style lang="scss" scoped>
