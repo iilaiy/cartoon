@@ -113,31 +113,24 @@ export function getSearchResult(param = { q: '' }) {
 }
 
 /**
- * 获获取分类数据 ❌
+ * 获获取分类数据
  * @param params 请求参数
- *  count 返回数量
- *  tag 分类
- *  sort 排序
- *  update_status 书本状态
  */
 export function getCategoryInfo(params = {}) {
-  const data = {
-    count: params.count || 24,
-    tag: params.tag || 0,
-    sort: params.sort || 1,
-    update_status: params.update_status || 0,
-  }
   return request({
-    url:
-      '/api/v1/search/by_tag?since=0&count=' +
-      data.count +
-      '&f=3&tag=' +
-      data.tag +
-      '&sort=' +
-      data.sort +
-      '&query_category={"update_status":' +
-      data.update_status +
-      '}',
+    url: `/mapi/search/mini/topic/multi_filter`,
+    params: {
+      diffServerTimestamp: Date.now(),
+      page: params.page || 1,
+      size: params.size || 20,
+      tag_id: params.tag_id || 0,
+      update_status: params.update_status || 0,
+      pay_status: params.pay_status || 0,
+      label_dimension_origin: params.label_dimension_origin || 1,
+      sort: params.sort || 1,
+      fav_filter: params.fav_filter || 0,
+      gender: 0,
+    },
     method: 'get',
   })
 }

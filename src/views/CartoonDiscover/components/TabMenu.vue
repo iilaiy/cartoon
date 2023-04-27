@@ -1,7 +1,12 @@
 <template>
   <div class="tab-menu" v-if="list">
     <div class="tabs">
-      <div class="tab" v-for="item in list.banner_list" :key="item.id">
+      <div
+        class="tab"
+        v-for="item in list.banner_list"
+        :key="item.id"
+        @click="toTabBarPageHandler(item)"
+      >
         <img :src="item.image" alt="" />
         <span>{{ item.title }}</span>
         <i>
@@ -13,12 +18,27 @@
 </template>
 
 <script setup>
-// import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
 defineProps({
   list: {
     type: Object,
   },
 })
+
+const toTabBarPageHandler = item => {
+  let routerUrl = ''
+  switch (item.title) {
+    case '作品分类':
+      routerUrl = '/tag'
+      break
+    case '作品排行':
+      routerUrl = ''
+      break
+  }
+  router.push(routerUrl)
+}
 </script>
 
 <style lang="scss" scoped>

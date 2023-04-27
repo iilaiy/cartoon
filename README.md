@@ -1,6 +1,6 @@
 ### **基于`vite`+`vue3.x`+ `vant4`+`vue-router`+`pinia`+`axios`的漫画 app**
 
-项目主要是以一个`vite`-`vue3`的项目搭建为基础，在项目中引入`Eslint`+`Prettier`+`husky`+`lint-staged`+`commitlint`+`commitizen`来规范项目，使用 Vue 官方团队推荐代替`Vuex`的一款轻量级状态管理库`pinia`对全局数据状态进行管理，`axios`网络通信技术实现数据交互。
+项目主要是以一个`vite`-`vue3`的项目搭建为基础，在项目中引入`Eslint`+`Prettier`+`husky`+`lint-staged`+`commitlint`+`commitizen`来规范项目
 
 项目开发时间: 4.15
 

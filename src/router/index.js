@@ -11,6 +11,16 @@ const routes = [
     component: () => import('@/views/CartoonDiscover/CartoonDiscover.vue'),
   },
   {
+    path: '/tag',
+    name: 'Tag',
+    meta: {
+      title: '漫画分类',
+      keepAlive: true,
+    },
+    component: () =>
+      import('@/views/CartoonClassification/CartoonClassification.vue'),
+  },
+  {
     path: '/recommend',
     name: 'Recommend',
     meta: {
