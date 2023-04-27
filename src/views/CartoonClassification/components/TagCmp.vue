@@ -4,28 +4,29 @@
       <li
         v-for="item in list"
         :key="item.tagId"
-        :class="[active === item.tagId ? 'tag_active' : '']"
-        @click="tagCartoonHandler(item)"
+        :class="[tagId === item.tagId ? 'tag_active' : '']"
+        @click="tagCartoonHandler(item, 'tags')"
       >
         <span>{{ item.title }}</span>
       </li>
     </ul>
-    <ul class="classify">
-      <li class="classify_active">
-        <span>全部</span>
-      </li>
-      <li>
-        <span>全部</span>
-      </li>
-      <li>
-        <span>全部</span>
+    <ul class="classify" v-for="(item, index) in classifyList" :key="index">
+      <li
+        :class="[item.active == val.id ? 'classify_active' : '']"
+        v-for="val in item.Categories"
+        :key="val.id"
+        @click="tagCartoonHandler(val, item.title)"
+      >
+        <span>{{ val.title }}</span>
       </li>
     </ul>
   </div>
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
+import { classify } from '@/data/classify.js'
+const emit = defineEmits(['tagsHandler'])
 
 const props = defineProps({
   list: {
@@ -33,10 +34,27 @@ const props = defineProps({
   },
 })
 
-const active = ref(props.list[0].tagId)
+const tagId = ref(props.list[0].tagId)
+const classifyList = ref(classify)
+const fav_filter = ref(0)
 
-const tagCartoonHandler = item => {
-  active.value = item.tagId
+const tagCartoonHandler = (item, type) => {
+  switch (type) {
+    case 'tags':
+      tagId.value = item.tagId
+      break
+    default:
+      classifyList.value.forEach(val => {
+        if (val.title == type) {
+          return (val.active = item.id)
+        }
+      })
+  }
+  emit('tagsHandler', {
+    tagId: tagId.value,
+    ...classifyList.value,
+    fav_filter: fav_filter.value,
+  })
 }
 </script>
 
@@ -87,16 +105,16 @@ const tagCartoonHandler = item => {
   .classify {
     li {
       position: relative;
-      &:after {
+      &:before {
         position: absolute;
-        right: -50%;
+        left: -0.3rem;
         color: #e6e6e6;
         content: '|';
         transform: scale(0.7);
       }
     }
-    li:last-child {
-      &:after {
+    li:first-child {
+      &:before {
         display: none;
       }
     }

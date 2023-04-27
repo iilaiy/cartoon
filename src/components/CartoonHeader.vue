@@ -25,7 +25,7 @@
 <script setup>
 import { useRouter } from 'vue-router'
 const router = useRouter()
-import logo from '@/assets/images/logo.png'
+import logo from '@/assets/images/logo.webp'
 
 const toSearch = () => {
   router.push({

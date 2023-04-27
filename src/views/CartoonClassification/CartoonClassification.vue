@@ -1,7 +1,7 @@
 <template>
-  <div class="cation" v-if="cartoonList.length > 0">
+  <div class="cation" v-if="cation.length > 0">
     <van-nav-bar title="分类" left-arrow @click-left="toBack" />
-    <TagCmp :list="cation"></TagCmp>
+    <TagCmp :list="cation" @tagsHandler="receiveTagsHandler"></TagCmp>
   </div>
 </template>
 
@@ -18,9 +18,11 @@ const cation = ref([])
 const page = ref(1)
 const cartoonList = ref([])
 
-const getCategoryInfoHandler = async () => {
+const tagsActive = ref({})
+
+const getCategoryInfoHandler = async params => {
   try {
-    const res = await getCategoryInfo({ page: page.value })
+    const res = await getCategoryInfo(params)
     console.log(res)
     cation.value = res.hits.topicCategories
     cartoonList.value = res.hits.topicMessageList
@@ -29,7 +31,19 @@ const getCategoryInfoHandler = async () => {
     console.log(e)
   }
 }
-getCategoryInfoHandler()
+getCategoryInfoHandler({ page: page.value })
+
+const receiveTagsHandler = obj => {
+  getCategoryInfoHandler({
+    page: page.value,
+    tag_id: obj.tagId,
+    update_status: obj[2].active,
+    pay_status: obj[1].active,
+    label_dimension_origin: obj[0].active,
+    sort: obj[3].active,
+    fav_filter: obj.fav_filter,
+  })
+}
 
 const toBack = () => {
   router.back()
