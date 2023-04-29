@@ -90,7 +90,6 @@ const onClickLeft = () => {
   color: #000000;
   font-size: 0.5rem;
 }
-
 .content {
   .item {
     display: flex;
