@@ -6,7 +6,7 @@ const routes = [
     name: 'Home',
     meta: {
       title: '发现',
-      keepAlive: true,
+      keepAlive: false,
       backTop: false,
     },
     component: () => import('@/views/CartoonDiscover/CartoonDiscover.vue'),
