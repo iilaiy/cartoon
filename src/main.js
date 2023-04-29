@@ -22,6 +22,7 @@ app.use(Vant)
 app.use(Lazyload, {
   lazyComponent: true,
 })
+
 const store = useSotre()
 app.config.globalProperties.$store = store
 app.config.globalProperties.getAssetsImages = getAssetsImages

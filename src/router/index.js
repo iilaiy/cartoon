@@ -7,6 +7,7 @@ const routes = [
     meta: {
       title: '发现',
       keepAlive: true,
+      backTop: false,
     },
     component: () => import('@/views/CartoonDiscover/CartoonDiscover.vue'),
   },
@@ -16,6 +17,7 @@ const routes = [
     meta: {
       title: '漫画分类',
       keepAlive: true,
+      backTop: true,
     },
     component: () =>
       import('@/views/CartoonClassification/CartoonClassification.vue'),
@@ -26,6 +28,7 @@ const routes = [
     meta: {
       title: '作品排行',
       keepAlive: true,
+      backTop: true,
     },
     component: () => import('@/views/RankingList/RankingList.vue'),
   },
@@ -35,6 +38,7 @@ const routes = [
     meta: {
       title: '推荐',
       keepAlive: true,
+      backTop: false,
     },
     component: () => import('@/views/CartoonRecommend/CartoonRecommend.vue'),
   },
@@ -44,6 +48,7 @@ const routes = [
     meta: {
       title: '世界',
       keepAlive: true,
+      backTop: false,
     },
     component: () => import('@/views/CartoonWorld/CartoonWorld.vue'),
   },
@@ -53,6 +58,7 @@ const routes = [
     meta: {
       title: '书架',
       keepAlive: true,
+      backTop: false,
     },
     component: () => import('@/views/BookList/BookList.vue'),
   },
@@ -61,6 +67,7 @@ const routes = [
     name: 'MoreView',
     meta: {
       title: '更多漫画',
+      backTop: true,
     },
     component: () => import('@/views/MoreView/MoreView.vue'),
   },
@@ -69,6 +76,7 @@ const routes = [
     name: 'Mobile',
     meta: {
       title: '漫画详情',
+      backTop: true,
     },
     component: () => import('@/views/CartoonDetails/CartoonDetails.vue'),
   },
@@ -77,6 +85,7 @@ const routes = [
     name: 'Comics',
     meta: {
       title: '章节详情',
+      backTop: true,
     },
     component: () => import('@/views/CartoonComics/CartoonComics.vue'),
   },
@@ -86,6 +95,7 @@ const routes = [
     meta: {
       title: '搜索',
       keepAlive: true,
+      backTop: true,
     },
     component: () => import('@/views/SearchPage/SearchView.vue'),
     children: [
@@ -121,12 +131,14 @@ const router = createRouter({
  * 路由守卫
  */
 router.beforeEach((to, from, next) => {
-  // chrome
-  document.body.scrollTop = 0
-  // firefox
-  document.documentElement.scrollTop = 0
-  // safari
-  window.pageYOffset = 0
+  if (to.meta.backTop) {
+    // chrome
+    document.body.scrollTop = 0
+    // firefox
+    document.documentElement.scrollTop = 0
+    // safari
+    window.pageYOffset = 0
+  }
   next()
 })
 
