@@ -142,8 +142,16 @@ const updataInputValHandler = async () => {
 
 // 根据子组件（热门、历史）传递的搜索内容进行搜索
 const toSearchResultHandler = item => {
-  searchValue.value = item
-  onSearch()
+  switch (item.type) {
+    case 'hot':
+      searchHistory.value.val.unshift(item.val)
+      localStorage.setItem('searchHistory', JSON.stringify(searchHistory.value))
+      break
+    case 'history':
+      searchValue.value = item.val
+      onSearch()
+      break
+  }
 }
 
 // 监听路由，进行数据请求（主要防止用户刷新数据丢失或返回上一页时数据没有实时更新）

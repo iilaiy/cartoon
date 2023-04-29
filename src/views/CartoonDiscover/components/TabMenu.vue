@@ -34,7 +34,7 @@ const toTabBarPageHandler = item => {
       routerUrl = '/tag'
       break
     case '作品排行':
-      routerUrl = ''
+      routerUrl = '/ranking'
       break
   }
   router.push(routerUrl)

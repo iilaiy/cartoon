@@ -91,6 +91,7 @@ const delHistory = index => {
 }
 
 const toDetailsHandler = item => {
+  emit('clickToSearchResultHandler', { val: item.target_title, type: 'hot' })
   router.push({
     path: `/mobile/${item.target_id}/list`,
   })
@@ -98,7 +99,7 @@ const toDetailsHandler = item => {
 
 const toSearchResultHandler = item => {
   // console.log(item)
-  emit('clickToSearchResultHandler', item)
+  emit('clickToSearchResultHandler', { val: item, type: 'history' })
 }
 </script>
 

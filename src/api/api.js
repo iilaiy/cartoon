@@ -136,11 +136,18 @@ export function getCategoryInfo(params = {}) {
 }
 
 /**
- * 获取全部榜单数据 ❌
+ * 获取全部榜单数据
  */
-export function getListInfo() {
+export function getListInfo(params = {}) {
   return request({
-    url: '/api/v2/pweb/all_rank/topics',
+    url: '/mapi/mini/v1/comic/mkuaikan/rank_list',
+    params: {
+      diffServerTimestamp: Date.now(),
+      since: params.since || 0,
+      limit: params.limit || 20,
+      need_ranks: true,
+      rank_id: params.rank_id,
+    },
     method: 'get',
   })
 }

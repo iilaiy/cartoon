@@ -1,57 +1,12 @@
 <template>
   <div class="mob-list">
-    <van-nav-bar
+    <MoreCmp
       :title="route.query.module_title"
-      left-arrow
-      @click-left="onClickLeft"
-    />
-    <div class="content">
-      <div
-        class="item"
-        v-for="item in moreList"
-        :key="item.id"
-        @click.stop="toList(item)"
-      >
-        <div class="img-box">
-          <img v-lazy="item.cover_image_url" alt="" />
-        </div>
-        <div class="right">
-          <div class="top">
-            <div class="title text-one-hidden">
-              {{ item.title }}
-            </div>
-            <div class="button" @click.stop="payAttentionTo">+ 关注</div>
-          </div>
-          <div class="tags">
-            <span v-for="(val, i) in item.category" :key="i">
-              {{ val }}
-            </span>
-          </div>
-          <div class="b-bot">
-            <div class="favourite">
-              <img src="@/assets/images/icon/link.png" alt="" />
-              <span>
-                {{
-                  item.like_count > 100000
-                    ? (item.like_count / 100000).toFixed(2) + '万'
-                    : item.like_count
-                }}
-              </span>
-            </div>
-            <div class="comment">
-              <img src="@/assets/images/icon/comment.png" alt="" />
-              <span>
-                {{
-                  item.comment_count > 100000
-                    ? (item.comment_count / 100000).toFixed(2) + '万'
-                    : item.comment_count
-                }}
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      :list="moreList"
+      @itemHandler="toList"
+    >
+      <div class="button" @click.stop="payAttentionTo">+ 关注</div>
+    </MoreCmp>
     <van-loading
       v-if="loading.show"
       :size="loading.size"
@@ -79,6 +34,7 @@ import {
   onBeforeUnmount,
 } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import MoreCmp from '@/components/MoreCmp.vue'
 import { getMoreCartoonInfo } from '@/api/api.js'
 const { appContext } = getCurrentInstance()
 const global = appContext.config.globalProperties
@@ -144,10 +100,6 @@ onMounted(() => {
 onBeforeUnmount(() => {
   window.removeEventListener('scroll', lazyLoading, false)
 })
-
-const onClickLeft = () => {
-  router.back()
-}
 
 const toList = item => {
   router.push({

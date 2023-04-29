@@ -9,7 +9,7 @@
       shrink
     >
       <template #nav-right>
-        <div class="more">
+        <div class="more" @click="toRankPage">
           <span>更多</span>
           <i><img src="@/assets/images/icon/arrow-right.png" alt="" /></i>
         </div>
@@ -82,6 +82,12 @@ const toList = item => {
       module_title: props.listInfo.banner_list[active.value].title,
       module_id: props.listInfo.banner_list[active.value].id,
     },
+  })
+}
+
+const toRankPage = () => {
+  router.push({
+    path: `/ranking`,
   })
 }
 </script>

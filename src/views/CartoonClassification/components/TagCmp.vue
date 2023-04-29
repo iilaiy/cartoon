@@ -36,7 +36,6 @@ const props = defineProps({
 
 const tagId = ref(props.list[0].tagId)
 const classifyList = ref(classify)
-const fav_filter = ref(0)
 
 const tagCartoonHandler = (item, type) => {
   switch (type) {
@@ -53,7 +52,6 @@ const tagCartoonHandler = (item, type) => {
   emit('tagsHandler', {
     tagId: tagId.value,
     ...classifyList.value,
-    fav_filter: fav_filter.value,
   })
 }
 </script>

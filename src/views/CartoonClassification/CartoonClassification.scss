@@ -4,3 +4,22 @@
 :deep(.van-nav-bar__title) {
   font-weight: normal;
 }
+.filtration {
+  width: 92%;
+  margin: 0 auto;
+}
+:deep(.van-checkbox),
+:deep(.van-checkbox__icon) {
+  display: flex;
+  align-items: center;
+}
+:deep(.van-checkbox__icon--checked .van-icon),
+:deep(.van-checkbox__icon .van-icon) {
+  font-size: 0.28rem;
+}
+:deep(.van-checkbox__label) {
+  color: #656565;
+  line-height: 0;
+  font-size: 0.28rem;
+  margin-left: 0.1rem;
+}

@@ -2,10 +2,10 @@
   <div class="recommend" v-if="list">
     <div class="recommend-top">
       <div class="title text-one-hidden">{{ title }}</div>
-      <div class="more">
+      <!-- <div class="more" @click="toMore">
         更多
         <img src="@/assets/images/icon/min-arrow-right.png" alt="" />
-      </div>
+      </div> -->
     </div>
     <div class="content">
       <div
@@ -33,12 +33,25 @@
         </div>
       </div>
     </div>
+    <!-- 右侧弹出 -->
+    <!-- <van-popup
+      v-model:show="showRight"
+      position="right"
+      closeable
+      :style="{ width: '100%', height: '100%' }"
+    >
+      <MoreCmp :title="title" :list="list" @itemHandler="toList"></MoreCmp>
+    </van-popup> -->
   </div>
 </template>
 
 <script setup>
+// import { ref } from 'vue'
+// import MoreCmp from '../../../components/MoreCmp.vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
+// const route = useRoute()
+// const showRight = ref(false)
 
 defineProps({
   list: {
@@ -54,6 +67,17 @@ const toList = item => {
     path: `/mobile/${item.id}/list`,
   })
 }
+
+// const toMore = () => {
+//   showRight.value = showRight.value === true ? false : true
+// }
+
+// watch(
+//   () => route.params.id,
+//   () => {
+//     showRight.value = false
+//   }
+// )
 </script>
 
 <style lang="scss" scoped>
@@ -73,14 +97,14 @@ const toList = item => {
     margin-right: 0.2rem;
     color: #333333;
   }
-  .more {
-    width: 1.2rem;
-    font-size: 0.34rem;
-    color: #9d9d9d;
-    img {
-      width: 0.3rem;
-    }
-  }
+  // .more {
+  //   width: 1.2rem;
+  //   font-size: 0.34rem;
+  //   color: #9d9d9d;
+  //   img {
+  //     width: 0.3rem;
+  //   }
+  // }
 }
 .content {
   flex-wrap: nowrap;

@@ -5,13 +5,13 @@
         <i class="back-icon" @click="toBack"></i>
       </div>
       <div class="mod-user">
-        <div class="user-avatar">
+        <div class="user-avatar" @click="toLogin">
           <span
             class="photo"
             :style="{ backgroundImage: `url('${userinfo.avatarUrl}')` }"
           ></span>
         </div>
-        <div class="user-name">
+        <div class="user-name" @click="toLogin">
           <span>{{ userinfo.name }}</span>
         </div>
       </div>
@@ -41,6 +41,7 @@
 
 <script setup>
 import { getCurrentInstance, reactive, ref } from 'vue'
+import { showToast } from 'vant'
 import { useRouter } from 'vue-router'
 import ModEmpty from './components/ModEmpty.vue'
 const { appContext } = getCurrentInstance()
@@ -77,6 +78,10 @@ const list = reactive([
 ])
 
 global.$store.vshow = false
+
+const toLogin = () => {
+  showToast('未开发登录接口')
+}
 
 const toBack = () => {
   router.back()

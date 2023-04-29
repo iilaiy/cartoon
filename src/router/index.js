@@ -21,6 +21,15 @@ const routes = [
       import('@/views/CartoonClassification/CartoonClassification.vue'),
   },
   {
+    path: '/ranking',
+    name: 'Ranking',
+    meta: {
+      title: '作品排行',
+      keepAlive: true,
+    },
+    component: () => import('@/views/RankingList/RankingList.vue'),
+  },
+  {
     path: '/recommend',
     name: 'Recommend',
     meta: {
@@ -108,7 +117,16 @@ const router = createRouter({
   routes,
 })
 
+/**
+ * 路由守卫
+ */
 router.beforeEach((to, from, next) => {
+  // chrome
+  document.body.scrollTop = 0
+  // firefox
+  document.documentElement.scrollTop = 0
+  // safari
+  window.pageYOffset = 0
   next()
 })
 

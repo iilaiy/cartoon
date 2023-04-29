@@ -29,7 +29,7 @@ defineProps({
 })
 
 const toSearchResultHandler = item => {
-  emit('clickToSearchResultHandler', item)
+  emit('clickToSearchResultHandler', { val: item, type: 'history' })
 }
 </script>
 
